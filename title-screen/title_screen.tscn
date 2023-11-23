@@ -511,38 +511,6 @@ theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 4
 
-[node name="ColorRect" type="ColorRect" parent="play_panel/deck_choser/GridContainer"]
-custom_minimum_size = Vector2(92, 128)
-layout_mode = 2
-
-[node name="ColorRect2" type="ColorRect" parent="play_panel/deck_choser/GridContainer"]
-custom_minimum_size = Vector2(92, 128)
-layout_mode = 2
-
-[node name="ColorRect3" type="ColorRect" parent="play_panel/deck_choser/GridContainer"]
-custom_minimum_size = Vector2(92, 128)
-layout_mode = 2
-
-[node name="ColorRect4" type="ColorRect" parent="play_panel/deck_choser/GridContainer"]
-custom_minimum_size = Vector2(92, 128)
-layout_mode = 2
-
-[node name="ColorRect5" type="ColorRect" parent="play_panel/deck_choser/GridContainer"]
-custom_minimum_size = Vector2(92, 128)
-layout_mode = 2
-
-[node name="ColorRect6" type="ColorRect" parent="play_panel/deck_choser/GridContainer"]
-custom_minimum_size = Vector2(92, 128)
-layout_mode = 2
-
-[node name="ColorRect7" type="ColorRect" parent="play_panel/deck_choser/GridContainer"]
-custom_minimum_size = Vector2(92, 128)
-layout_mode = 2
-
-[node name="ColorRect8" type="ColorRect" parent="play_panel/deck_choser/GridContainer"]
-custom_minimum_size = Vector2(92, 128)
-layout_mode = 2
-
 [node name="gamemode" type="ScrollContainer" parent="play_panel"]
 layout_mode = 0
 offset_left = 26.0

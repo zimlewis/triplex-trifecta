@@ -11,7 +11,7 @@ var reinalia_cards = []
 
 var grid_size = Vector2(92 * 2.25 , 128 * 2.25)
 
-var max_lad = 16
+var max_lad = 15
 var max_leader = 1
 
 var deck = []
@@ -193,23 +193,27 @@ func remove_from_deck(card):
 
 
 func _on_button_pressed():
-	print(deck.size())
+	print(deck)
 	var deck_name = $selected_card/LineEdit.text.strip_edges(true , true)
-	if deck.size() != 15: return
-	var has_leader = false
+	var leader_count = 0
+	var lad_count = 0
 	for i in deck:
 		if GameData.card_database[i].type == "Leader":
-			has_leader = true
-	if !has_leader: return
+			leader_count += 1
+		if GameData.card_database[i].type == "Lad":
+			lad_count += 1
+
+	if !leader_count == max_leader: return
+	if !lad_count == max_lad: return
+	
 	if deck_name == "": return
 	
 	
 	var firestore_collection = Firebase.Firestore.collection("users")
-	var document_task: FirestoreTask = firestore_collection.get_doc(GameData.user_data.doc_name)
-	var document = await document_task.get_document
-	var had_decks = document.doc_fields.decks
+	var had_decks = GameData.user_data.doc_fields.decks
 
 	had_decks[deck_name] = deck
+	print(had_decks)
 	var up_task: FirestoreTask = firestore_collection.update(GameData.user_data.doc_name , {'decks' : had_decks})
 
 

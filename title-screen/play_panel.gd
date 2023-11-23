@@ -2,14 +2,43 @@ extends NinePatchRect
 
 @onready var game_option_button = $gamemode/HBoxContainer.get_children()
 var chosen_mode : String : set = set_chosen_mode
-
-
-
+var decks : set = set_decks
+var grid_size = Vector2(147.2 , 204.8)
 
 func _ready():
 	chosen_mode = "unrated"
 	for i in game_option_button:
 		i.connect("menu_inputed" , _on_menu_inputed)
+
+func set_decks(value):
+	decks = value
+	for i in decks.duplicate():
+		var grid = Control.new()
+		grid.custom_minimum_size = grid_size
+		var deck_name = Label.new()
+		var leader = load("res://game-components/card/card.tscn").instantiate()
+		var leader_id
+		for ii in decks[i]:
+			if "leader" in ii:
+				leader_id = ii
+
+		leader.card_id = leader_id
+		print(leader_id)
+		deck_name.size = Vector2(147.2 , 34)
+		deck_name.position = Vector2(0 , 170.8)
+		deck_name.text = i
+		deck_name.theme = load("res://deck-builder/deck.tres")
+		deck_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		deck_name.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		grid.add_child(deck_name)
+		grid.add_child(leader)
+		$deck_choser/GridContainer.add_child(grid)
+		leader.scale *= grid_size * 0.85 / GameManager.card_size
+		leader.position.x = (grid_size.x - GameManager.card_texture_size.x * leader.scale.x) / 2
+
+
+
+
 
 
 
@@ -32,7 +61,7 @@ func set_chosen_mode(value):
 		"unrated":
 			tween.tween_property($deck_choser , "size" , Vector2(666 , 442) , 1)
 			tween.tween_property($deck_choser , "position" , Vector2(27 , 80) , 1)
-			$deck_choser/GridContainer.columns = 6
+			$deck_choser/GridContainer.columns = 4
 			tween.tween_property($play_info , "size" , Vector2(287 , 442) , 1)
 			tween.tween_property($play_info , "position" , Vector2(726 , 80) , 1)
 			tween.tween_property($play_info/chosen_deck_1 , "size" , Vector2(184 , 256) , 1)
@@ -44,7 +73,7 @@ func set_chosen_mode(value):
 		"competitive":
 			tween.tween_property($deck_choser , "size" , Vector2(666 , 442) , 1)
 			tween.tween_property($deck_choser , "position" , Vector2(27 , 80) , 1)
-			$deck_choser/GridContainer.columns = 6
+			$deck_choser/GridContainer.columns = 4
 			tween.tween_property($play_info , "size" , Vector2(287 , 442) , 1)
 			tween.tween_property($play_info , "position" , Vector2(726 , 80) , 1)
 			tween.tween_property($play_info/chosen_deck_1 , "size" , Vector2(184 , 256) , 1)
@@ -54,14 +83,9 @@ func set_chosen_mode(value):
 			tween.tween_property($play_info/chosen_deck_2 , "modulate:a" , 0 , 1)
 			pass
 		"local":
-			tween.tween_property($deck_choser , "size" , Vector2(431 , 442) , 1)
+			tween.tween_property($deck_choser , "size" , Vector2(470 , 442) , 1)
 			tween.tween_property($deck_choser , "position" , Vector2(27 , 80) , 1)
-			var lambda = func():
-				await get_tree().create_timer(.3).timeout
-				$deck_choser/GridContainer.columns = 5
-				await get_tree().create_timer(.2).timeout
-				$deck_choser/GridContainer.columns = 4
-			lambda.call()
+			$deck_choser/GridContainer.columns = 3
 			tween.tween_property($play_info , "size" , Vector2(517 , 442) , 1)
 			tween.tween_property($play_info , "position" , Vector2(496 , 80) , 1)
 			tween.tween_property($play_info/chosen_deck_1 , "size" , Vector2(184 , 256) , 1)

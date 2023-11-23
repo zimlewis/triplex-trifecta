@@ -47,15 +47,15 @@ func _ready():
 
 func set_placed(value):
 	placed = value
-	if card_information.type == "lads":
-		if placed:
-			frame.size = Vector2(920 , 920)
-			ability_description.visible = false
-			effect_all.visible = false
-		else:
-			frame.size = Vector2(920 , 1280)
-			ability_description.visible = true
-			effect_all.visible = true
+	if placed:
+		frame.size = Vector2(920 , 920)
+		ability_description.visible = false
+		effect_all.visible = false
+		
+	else:
+		frame.size = Vector2(920 , 1280)
+		ability_description.visible = true
+		effect_all.visible = true
 
 
 

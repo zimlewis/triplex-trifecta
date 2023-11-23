@@ -37,13 +37,11 @@ var index = 0 : set = set_index
 
 func _ready():
 	self.index = 1
-	var firestore_collection = Firebase.Firestore.collection("users")
-	var document_task: FirestoreTask = firestore_collection.get_doc(GameData.user_data.doc_name)
-	var document = await document_task.get_document
 	$account_bar/name.text = str(GameData.user_data.doc_fields.in_game_name)
 	$account_bar/lv.text = "LV: " + str(GameData.user_data.doc_fields.lv)
 	$account_bar/rank.text = "RP: " + str(GameData.user_data.doc_fields.rank)
-	$deck_panel.decks = document.doc_fields.decks
+	$deck_panel.decks = GameData.user_data.doc_fields.decks
+	$play_panel.decks = GameData.user_data.doc_fields.decks
 	pass
 
 func _physics_process(delta):
