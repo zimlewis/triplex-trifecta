@@ -9,6 +9,7 @@ void fragment(){
 	vec4 color = texture(TEXTURE,UV);
 	if (UV.x<=crop_left || UV.x>=1.0-crop_right || UV.y>=1.0-crop_bottom || UV.y<=crop_top){
 		color.a = 0.0;
+		COLOR = color;
 	}
-	COLOR = color;
+	
 }

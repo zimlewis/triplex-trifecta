@@ -218,4 +218,15 @@ func _on_button_pressed():
 
 
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://title-screen/title_screen.tscn")
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT).set_parallel(false)
+	var cover = ColorRect.new()
+	get_tree().get_root().add_child(cover)
+	cover.position = Vector2(0 , 0)
+	cover.size = Vector2(1280 , 720)
+	cover.modulate = Color.BLACK
+	cover.modulate.a = 0
+	tween.tween_property(cover , "modulate:a" , 1 , 1)
+	tween.tween_callback(queue_free)
+	tween.tween_property(cover , "modulate:a" , 0 , 1)
+	tween.tween_callback(cover.queue_free)
+	

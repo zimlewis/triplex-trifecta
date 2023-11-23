@@ -53,8 +53,16 @@ func _process(delta):
 
 
 func _on_create_button_pressed():
-	get_tree().change_scene_to_file("res://deck-builder/deck_builder.tscn")
-
+	var tween = get_tree().create_tween().set_parallel(true).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
+	var deck_builder = load("res://deck-builder/deck_builder.tscn").instantiate()
+	get_tree().get_root().add_child(deck_builder)
+	deck_builder.modulate.a = 0
+	tween.tween_property(deck_builder , "modulate:a" , 1 , 1)
+	
 
 func _on_edit_button_pressed():
-	get_tree().change_scene_to_file("res://deck-builder/deck_builder.tscn")
+	var tween = get_tree().create_tween().set_parallel(true).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
+	var deck_builder = load("res://deck-builder/deck_builder.tscn").instantiate()
+	get_tree().get_root().add_child(deck_builder)
+	deck_builder.modulate.a = 0
+	tween.tween_property(deck_builder , "modulate:a" , 1 , 1)
