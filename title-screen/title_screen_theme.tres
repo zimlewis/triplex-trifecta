@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dqjm0g80h0h8f"]
+
+[ext_resource type="FontFile" uid="uid://cjs2giljtia4" path="res://fonts/vinque.rg-regular.otf" id="1_ioeb7"]
+
+[resource]
+Button/font_sizes/font_size = 38
+Button/fonts/font = ExtResource("1_ioeb7")
+Label/font_sizes/font_size = 29
+Label/fonts/font = ExtResource("1_ioeb7")

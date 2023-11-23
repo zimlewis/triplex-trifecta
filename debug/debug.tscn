@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cccud1waxxsdo"]
+
+[ext_resource type="Script" path="res://debug/debug.gd" id="1_cghtg"]
+[ext_resource type="Script" path="res://game-components/panning-camera/panning_camera.gd" id="2_i4wnr"]
+
+[node name="debug" type="Node2D"]
+script = ExtResource("1_cghtg")
+
+[node name="PanningCamera2D" type="Camera2D" parent="."]
+script = ExtResource("2_i4wnr")

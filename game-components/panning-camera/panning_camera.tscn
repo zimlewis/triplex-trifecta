@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxdqrhgm2bram"]
+
+[ext_resource type="Script" path="res://game-components/panning-camera/panning_camera.gd" id="1_1ajs7"]
+
+[node name="panning_camera" type="Camera2D"]
+script = ExtResource("1_1ajs7")

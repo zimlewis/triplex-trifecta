@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bnlex362ry66l"]
+
+[ext_resource type="Shader" path="res://title-screen/blur.gdshader" id="1_k3ydd"]
+
+[resource]
+shader = ExtResource("1_k3ydd")
+shader_parameter/strength = 6

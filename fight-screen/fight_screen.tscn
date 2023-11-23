@@ -1,0 +1,292 @@
+[gd_scene load_steps=4 format=3 uid="uid://cifc1sl667e5a"]
+
+[ext_resource type="PackedScene" uid="uid://okjcdlpts531" path="res://game-components/card-placement/board_placement_slot.tscn" id="1_t8g3h"]
+[ext_resource type="PackedScene" uid="uid://dxdqrhgm2bram" path="res://game-components/panning-camera/panning_camera.tscn" id="2_3y8sg"]
+[ext_resource type="PackedScene" uid="uid://cwvogqiwgp5h0" path="res://game-components/card/card.tscn" id="3_xpofw"]
+
+[node name="fight_screen" type="Node2D"]
+
+[node name="board" type="Node2D" parent="."]
+
+[node name="row_1" type="Node2D" parent="board"]
+position = Vector2(136, -144)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_1" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="row_2" type="Node2D" parent="board"]
+position = Vector2(136, -32)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_2" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="row_3" type="Node2D" parent="board"]
+position = Vector2(136, 80)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_3" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="row_4" type="Node2D" parent="board"]
+position = Vector2(136, 192)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_4" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="row_5" type="Node2D" parent="board"]
+position = Vector2(136, 304)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_5" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="row_6" type="Node2D" parent="board"]
+position = Vector2(136, 416)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_6" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="row_7" type="Node2D" parent="board"]
+position = Vector2(136, 528)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_7" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="row_8" type="Node2D" parent="board"]
+position = Vector2(136, 640)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_8" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="row_9" type="Node2D" parent="board"]
+position = Vector2(136, 752)
+metadata/_edit_group_ = true
+
+[node name="cell_1" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+
+[node name="cell_2" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+position = Vector2(112, 0)
+
+[node name="cell_3" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+position = Vector2(224, 0)
+
+[node name="cell_4" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+position = Vector2(336, 0)
+
+[node name="cell_5" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+position = Vector2(448, 0)
+
+[node name="cell_6" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+position = Vector2(560, 0)
+
+[node name="cell_7" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+position = Vector2(672, 0)
+
+[node name="cell_8" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+position = Vector2(784, 0)
+
+[node name="cell_9" parent="board/row_9" instance=ExtResource("1_t8g3h")]
+position = Vector2(896, 0)
+
+[node name="panning_camera" parent="." instance=ExtResource("2_3y8sg")]
+position = Vector2(640, 360)
+zoom = Vector2(3, 3)
+limit_left = -1700
+limit_top = -1600
+limit_right = 2780
+limit_bottom = 2420
+
+[node name="card" parent="." instance=ExtResource("3_xpofw")]
+position = Vector2(584, 304)
+metadata/_edit_horizontal_guides_ = [95.0]
+metadata/_edit_vertical_guides_ = [478.0]

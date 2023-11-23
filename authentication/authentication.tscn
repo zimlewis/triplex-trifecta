@@ -1,0 +1,177 @@
+[gd_scene load_steps=2 format=3 uid="uid://dab4mjccqkynp"]
+
+[ext_resource type="Script" path="res://authentication/authentication.gd" id="1_quy56"]
+
+[node name="authentication" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_quy56")
+
+[node name="form" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+
+[node name="login" type="TabBar" parent="form"]
+layout_mode = 2
+
+[node name="email" type="LineEdit" parent="form/login"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -192.5
+offset_right = 196.0
+offset_bottom = -135.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Email"
+
+[node name="password" type="LineEdit" parent="form/login"]
+layout_mode = 2
+offset_left = 444.0
+offset_top = 251.0
+offset_right = 836.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Password"
+secret = true
+secret_character = "ඞ"
+
+[node name="btn_login" type="Button" parent="form/login"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 444.0
+offset_top = 458.0
+offset_right = 836.0
+offset_bottom = 515.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Login"
+
+[node name="rememeber_me" type="CheckBox" parent="form/login"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -16.5
+offset_right = 192.0
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Remember me?"
+
+[node name="error" type="Label" parent="form/login"]
+layout_mode = 0
+offset_top = 401.0
+offset_right = 1280.0
+offset_bottom = 441.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="register" type="TabBar" parent="form"]
+visible = false
+layout_mode = 2
+
+[node name="username" type="LineEdit" parent="form/register"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -192.5
+offset_right = 196.0
+offset_bottom = -135.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Username"
+
+[node name="email" type="LineEdit" parent="form/register"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -114.5
+offset_right = 196.0
+offset_bottom = -57.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Email"
+
+[node name="password" type="LineEdit" parent="form/register"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -39.5
+offset_right = 196.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Password"
+secret = true
+secret_character = "ඞ"
+
+[node name="password_confirm" type="LineEdit" parent="form/register"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = 32.5
+offset_right = 196.0
+offset_bottom = 89.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Confirm password"
+secret = true
+secret_character = "ඞ"
+
+[node name="btn_register" type="Button" parent="form/register"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 160.5
+offset_right = 200.0
+offset_bottom = 224.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Register"
+
+[node name="error" type="Label" parent="form/register"]
+layout_mode = 0
+offset_top = 449.0
+offset_right = 1280.0
+offset_bottom = 489.0
+horizontal_alignment = 1
+vertical_alignment = 1
