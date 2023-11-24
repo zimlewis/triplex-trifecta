@@ -1,10 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://cwvogqiwgp5h0"]
+[gd_scene load_steps=23 format=3 uid="uid://cwvogqiwgp5h0"]
 
-[ext_resource type="Texture2D" uid="uid://bhjv2emuc37rl" path="res://game-components/card/frame.png" id="1_c377w"]
 [ext_resource type="Script" path="res://game-components/card/card.gd" id="1_e54oh"]
 [ext_resource type="Shader" path="res://game-components/card/crop.gdshader" id="2_craub"]
-[ext_resource type="Texture2D" uid="uid://dak1ohug537bn" path="res://Amelia.png" id="3_4f8bb"]
-[ext_resource type="Texture2D" uid="uid://c7n3436v4wuq5" path="res://game-components/card/box.png" id="5_luy6s"]
 [ext_resource type="Texture2D" uid="uid://d3t3wxf1l68qy" path="res://game-components/card/bar/leftBar.png" id="5_o1kkw"]
 [ext_resource type="Theme" uid="uid://pouk3bvjvx18" path="res://game-components/card/card.tres" id="6_5svqc"]
 [ext_resource type="Texture2D" uid="uid://jejiwqfyc63o" path="res://game-components/card/bar_icon/l.png" id="6_efj20"]
@@ -17,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://db58v6h5irgr5" path="res://game-components/card/bar_effct/bar_top_effect.png" id="9_n0uju"]
 [ext_resource type="Texture2D" uid="uid://cp3exnw8vnvjm" path="res://game-components/card/bar_effct/bar_bottom_effect.png" id="10_8c53s"]
 [ext_resource type="Texture2D" uid="uid://b1npak41fcitl" path="res://game-components/card/bar_icon/r.png" id="10_d4xvl"]
-[ext_resource type="Texture2D" uid="uid://bgdaq6y5tfgx6" path="res://game-components/card/icons/balls.png" id="10_nkb8q"]
 [ext_resource type="Texture2D" uid="uid://bklh12fra4bxi" path="res://game-components/card/icons/Wildcardz.png" id="11_khnek"]
 [ext_resource type="Texture2D" uid="uid://l2dbt0pstjgb" path="res://game-components/card/icons/Lad.png" id="12_3fpi6"]
 
@@ -82,7 +78,6 @@ metadata/_edit_vertical_guides_ = [460.0]
 
 [node name="image" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qka3k")
-texture = ExtResource("3_4f8bb")
 centered = false
 
 [node name="bar" type="Node2D" parent="."]
@@ -163,7 +158,6 @@ text = "Dominance"
 horizontal_alignment = 1
 
 [node name="card_description_frame" type="Sprite2D" parent="."]
-texture = ExtResource("5_luy6s")
 centered = false
 
 [node name="center" type="VBoxContainer" parent="card_description_frame"]
@@ -181,7 +175,6 @@ text = "[center]qweqweqwwqeqweqweqweqweqweqweqweqweqweqweqweqweqw"
 fit_content = true
 
 [node name="detailed_information" type="Sprite2D" parent="card_description_frame"]
-texture = ExtResource("10_nkb8q")
 centered = false
 
 [node name="region" type="Sprite2D" parent="card_description_frame/detailed_information"]
@@ -311,7 +304,6 @@ horizontal_alignment = 1
 [node name="frame" type="NinePatchRect" parent="."]
 offset_right = 920.0
 offset_bottom = 1280.0
-texture = ExtResource("1_c377w")
 patch_margin_left = 41
 patch_margin_top = 49
 patch_margin_right = 41

@@ -14,30 +14,30 @@ const leader_stat_color = {
 }
 
 var card_database = {
-	"lad_test": {
-		"name" : "_test",
-		"title" : "memaybeo",
-		"left" : 0,
-		"right" : 0,
-		"middle" : 0,
-		"effect_left" : {"side" : "l" , "stat" : 0},
-		"effect_right" : {"side" : "r" , "stat" : 0},
-		"effect_top" : {"side" : "m" , "stat" : -1},
-		"effect_bottom" : {"side" : "m" , "stat" : -1},
-		"ability" : "Cocaidai",
-		"type" : "Lad",
-		"region" : "Aouni"
-	},
-	"leader_test": {
-		"name" : "_thu",
-		"title" : "The leader test",
-		"left" : "Dominance",
-		"right" : "Agility",
-		"middle" : "Vigilance",
-		"ability" : "test leader ability",
-		"type" : "Leader",
-		"region" : "Aouni"
-	},
+#	"lad_test": {
+#		"name" : "_test",
+#		"title" : "memaybeo",
+#		"left" : 0,
+#		"right" : 0,
+#		"middle" : 0,
+#		"effect_left" : {"side" : "l" , "stat" : 0},
+#		"effect_right" : {"side" : "r" , "stat" : 0},
+#		"effect_top" : {"side" : "m" , "stat" : -1},
+#		"effect_bottom" : {"side" : "m" , "stat" : -1},
+#		"ability" : "Cocaidai",
+#		"type" : "Lad",
+#		"region" : "Aouni"
+#	},
+#	"leader_test": {
+#		"name" : "_thu",
+#		"title" : "The leader test",
+#		"left" : "Dominance",
+#		"right" : "Agility",
+#		"middle" : "Vigilance",
+#		"ability" : "test leader ability",
+#		"type" : "Leader",
+#		"region" : "Aouni"
+#	},
 	"lad_reinalia_amelia": {
 		"name" : "Amelia",
 		"title" : "The loyal",

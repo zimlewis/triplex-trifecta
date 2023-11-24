@@ -23,7 +23,6 @@ func set_decks(value):
 				leader_id = ii
 
 		leader.card_id = leader_id
-		print(leader_id)
 		deck_name.size = Vector2(147.2 , 34)
 		deck_name.position = Vector2(0 , 170.8)
 		deck_name.text = i

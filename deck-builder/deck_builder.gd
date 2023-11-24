@@ -66,8 +66,9 @@ func add_to_deck(card):
 	card_label.mouse_filter = Control.MOUSE_FILTER_STOP
 	card_label.gui_input.connect(
 		func(event):
-			if event is InputEventMouseButton and event.button_mask == 1:
-				remove_from_deck(card)
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+				if event.pressed:
+					remove_from_deck(card)
 			pass
 	)
 

@@ -10,6 +10,12 @@ func set_decks(value):
 	for i in decks.duplicate():
 		var grid = Control.new()
 		grid.custom_minimum_size = grid_size
+		grid.name = i
+		grid.gui_input.connect(func(event):
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+				if event.pressed:
+					choose_deck(i)
+		)
 		
 		
 		var leader = load("res://game-components/card/card.tscn").instantiate()
@@ -21,6 +27,7 @@ func set_decks(value):
 		leader.card_id = leader_id
 		leader.scale *= grid_size * 0.85 / GameManager.card_size
 		leader.position.x = (grid_size.x - GameManager.card_texture_size.x * leader.scale.x) / 2
+		
 		
 		
 		var deck_name = Label.new()
@@ -45,12 +52,17 @@ func _ready():
 	
 	pass
 
+func choose_deck(deck):
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
 	pass
 
+
+func select_deck(deck):
+	pass
 
 func _on_create_button_pressed():
 	var tween = get_tree().create_tween().set_parallel(true).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
