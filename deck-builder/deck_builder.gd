@@ -18,133 +18,25 @@ var deck = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in GameData.card_database:
-		if "thyena" in i:
-			thyena_cards.append(i)
-		if "tikkers" in i:
-			tikkers_cards.append(i)
-		if "aouni" in i:
-			aouni_cards.append(i)
-		if "mysticle" in i:
-			mysticle_cards.append(i)
-		if "wildcardz" in i:
-			wildcardz_cards.append(i)
-		if "kahn" in i:
-			kahn_cards.append(i)
-		if "reinalia" in i:
-			reinalia_cards.append(i)
-	
-	thyena_cards.reverse()
-	tikkers_cards.reverse()
-	aouni_cards.reverse()
-	mysticle_cards.reverse()
-	wildcardz_cards.reverse()
-	kahn_cards.reverse()
-	reinalia_cards.reverse()
-	
-	
-	for i in thyena_cards:
 		var grid = Control.new()
 		grid.name = i
 		grid.custom_minimum_size = grid_size
+		grid.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		var card = preload("res://game-components/card/card.tscn").instantiate()
 		card.name = i
 		card.card_id = i
 		grid.add_child(card)
-		
-		%Thyena/GridContainer.add_child(grid)
-		card.scale *= grid_size / GameManager.card_size
-		card.mouse_event.connect(card_inputed)
-		
-		pass
-	
-	for i in tikkers_cards:
-		var grid = Control.new()
-		grid.name = i
-		grid.custom_minimum_size = grid_size
-		
-		var card = preload("res://game-components/card/card.tscn").instantiate()
-		card.name = i
-		card.card_id = i
-		grid.add_child(card)
-	
-		%Tikkers/GridContainer.add_child(grid)
-		card.scale *= grid_size / GameManager.card_size
-		card.mouse_event.connect(card_inputed)
-		
-	for i in aouni_cards:
-		var grid = Control.new()
-		grid.name = i
-		grid.custom_minimum_size = grid_size
-		
-		var card = preload("res://game-components/card/card.tscn").instantiate()
-		card.name = i
-		card.card_id = i
-		grid.add_child(card)
-	
-		%Aouni/GridContainer.add_child(grid)
-		card.scale *= grid_size / GameManager.card_size
-		card.mouse_event.connect(card_inputed)
-		
-	for i in mysticle_cards:
-		var grid = Control.new()
-		grid.name = i
-		grid.custom_minimum_size = grid_size
-		
-		var card = preload("res://game-components/card/card.tscn").instantiate()
-		card.name = i
-		card.card_id = i
-		grid.add_child(card)
-	
-		%Mysticle/GridContainer.add_child(grid)
-		card.scale *= grid_size / GameManager.card_size
-		card.mouse_event.connect(card_inputed)
-		
-	for i in wildcardz_cards:
-		var grid = Control.new()
-		grid.name = i
-		grid.custom_minimum_size = grid_size
-		
-		var card = preload("res://game-components/card/card.tscn").instantiate()
-		card.name = i
-		card.card_id = i
-		grid.add_child(card)
-	
-		%Wildcardz/GridContainer.add_child(grid)
-		card.scale *= grid_size / GameManager.card_size
-		card.mouse_event.connect(card_inputed)
-		
-	for i in kahn_cards:
-		var grid = Control.new()
-		grid.name = i
-		grid.custom_minimum_size = grid_size
-		
-		var card = preload("res://game-components/card/card.tscn").instantiate()
-		card.name = i
-		card.card_id = i
-		grid.add_child(card)
-	
-		%Kahn/GridContainer.add_child(grid)
-		card.scale *= grid_size / GameManager.card_size
-		card.mouse_event.connect(card_inputed)
-		
-	for i in reinalia_cards:
-		var grid = Control.new()
-		grid.name = i
-		grid.custom_minimum_size = grid_size
-		
-		var card = preload("res://game-components/card/card.tscn").instantiate()
-		card.name = i
-		card.card_id = i
-		grid.add_child(card)
-	
-		%Reinalia/GridContainer.add_child(grid)
+		get_node("card/deck_selection/" + GameData.card_database[i].region + "/GridContainer").add_child(grid)
+		if card.card_information.type == "Leader":
+			get_node("card/deck_selection/" + GameData.card_database[i].region + "/GridContainer").move_child(grid , 0)
 		card.scale *= grid_size / GameManager.card_size
 		card.mouse_event.connect(card_inputed)
 
 func card_inputed(card , event):
-	if event.button_mask == 1:
-		add_to_deck(card)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			add_to_deck(card)
 
 func add_to_deck(card):
 	if card.card_information.type == "Leader":
@@ -168,6 +60,9 @@ func add_to_deck(card):
 	card_label.name = card.card_id + "_" + str(deck.size())
 	card_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	%cards.add_child(card_label)
+	if card.card_information.type == "Leader":
+		%cards.move_child(card_label , 0)
+		card_label.modulate = Color.YELLOW
 	card_label.mouse_filter = Control.MOUSE_FILTER_STOP
 	card_label.gui_input.connect(
 		func(event):
@@ -186,14 +81,10 @@ func remove_from_deck(card):
 		if card.card_id in i.name:
 			card_label = i
 	
-	
 	card_label.queue_free()
-	
-	pass
 
 
 func _on_button_pressed():
-	print(deck)
 	var deck_name = $selected_card/LineEdit.text.strip_edges(true , true)
 	var leader_count = 0
 	var lad_count = 0
@@ -213,7 +104,6 @@ func _on_button_pressed():
 	var had_decks = GameData.user_data.doc_fields.decks
 
 	had_decks[deck_name] = deck
-	print(had_decks)
 	var up_task: FirestoreTask = firestore_collection.update(GameData.user_data.doc_name , {'decks' : had_decks})
 
 

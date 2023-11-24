@@ -133,14 +133,7 @@ func init_card():
 	ability_description.texture = load("res://game-components/card/boxes/box_" + card_information.region.to_lower() + ".png")
 	ability_description.get_node("detailed_information").texture = load("res://game-components/card/balls/slot_" + card_information.region.to_lower() + ".png")
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if mouse_in_card:
-			mouse_event.emit(self , event)
-
-func _on_area_2d_mouse_entered():
-	mouse_in_card = true
 
 
-func _on_area_2d_mouse_exited():
-	mouse_in_card = false
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	mouse_event.emit(self , event)
