@@ -140,6 +140,7 @@ func remove_from_deck(card):
 
 
 func _on_button_pressed():
+	$selected_card/Button.disabled = true
 	var deck_name = $selected_card/LineEdit.text.strip_edges(true , true)
 	var leader_count = 0
 	var lad_count = 0
@@ -176,9 +177,9 @@ func _on_button_pressed():
 	deck_panel.decks = GameData.user_data.doc_fields.decks
 	play_panel.decks = GameData.user_data.doc_fields.decks
 	
+	turn_off_deck_builder()
 
-
-func _on_back_pressed():
+func turn_off_deck_builder():
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT).set_parallel(false)
 	var cover = ColorRect.new()
 	get_tree().get_root().add_child(cover)
@@ -189,5 +190,8 @@ func _on_back_pressed():
 	tween.tween_property(cover , "modulate:a" , 1 , 1)
 	tween.tween_callback(queue_free)
 	tween.tween_property(cover , "modulate:a" , 0 , 1)
-	tween.tween_callback(cover.queue_free)
+	tween.tween_callback(cover.queue_free)	
+
+func _on_back_pressed():
+	turn_off_deck_builder()
 	

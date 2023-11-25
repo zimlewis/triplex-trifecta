@@ -8,6 +8,12 @@ var decks : set = set_decks
 var chosen_deck
 
 func set_decks(value):
+	if $play_info/deck_hover.get_child(0) != null:
+		$play_info/deck_hover.get_child(0).queue_free()
+	chosen_deck = ""
+	$play_info/edit_button.disabled = true
+	$play_info/remove_button.disabled = true
+	$play_info/chosen_deck_name.text = ""
 	decks = value
 	for i in $deck_choser/GridContainer.get_children():
 		i.queue_free()
@@ -73,6 +79,7 @@ func choose_deck(deck):
 	$play_info/chosen_deck_name.text = deck
 	chosen_deck = deck
 	$play_info/edit_button.disabled = false
+	$play_info/remove_button.disabled = false
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -92,11 +99,7 @@ func _on_create_button_pressed():
 	get_tree().get_root().add_child(deck_builder)
 	deck_builder.modulate.a = 0
 	tween.tween_property(deck_builder , "modulate:a" , 1 , 1)
-	if $play_info/deck_hover.get_child(0) != null:
-		$play_info/deck_hover.get_child(0).queue_free()
-	chosen_deck = ""
-	$play_info/edit_button.disabled = true
-	$play_info/chosen_deck_name.text = ""
+
 	
 
 func _on_edit_button_pressed():
@@ -110,8 +113,25 @@ func _on_edit_button_pressed():
 	get_tree().get_root().add_child(deck_builder)
 	deck_builder.modulate.a = 0
 	tween.tween_property(deck_builder , "modulate:a" , 1 , 1)
-	if $play_info/deck_hover.get_child(0) != null:
-		$play_info/deck_hover.get_child(0).queue_free()
+
+
+func _on_remove_button_pressed():
+	var firestore_collection = Firebase.Firestore.collection("users")
+	var had_decks = GameData.user_data.doc_fields.decks
+	
+	had_decks.erase(chosen_deck)
+	var up_task: FirestoreTask = firestore_collection.update(GameData.user_data.doc_name , {'decks' : had_decks})
+	
+	
 	chosen_deck = ""
 	$play_info/edit_button.disabled = true
+	$play_info/remove_button.disabled = true
 	$play_info/chosen_deck_name.text = ""
+	if $play_info/deck_hover.get_child(0) != null:
+		$play_info/deck_hover.get_child(0).queue_free()
+	
+	await up_task.task_finished
+	firestore_collection.get_doc(Firebase.Auth.auth.localid)
+	GameData.user_data = await firestore_collection.get_document
+	decks = GameData.user_data.doc_fields.decks
+	$"../play_panel".decks = GameData.user_data.doc_fields.decks

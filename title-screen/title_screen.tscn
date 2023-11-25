@@ -395,7 +395,6 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="play_panel" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 1501.0
 offset_top = 54.0
@@ -428,8 +427,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 496.0
-offset_top = 80.0
+offset_left = 736.0
+offset_top = 32.0
 offset_right = -35.0
 offset_bottom = -32.0
 grow_horizontal = 2
@@ -440,58 +439,48 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 11
 
-[node name="Label" type="Label" parent="play_panel/play_info"]
+[node name="chosen_deck_name" type="Label" parent="play_panel/play_info"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 23.0
-offset_bottom = 62.0
+offset_left = 55.0
+offset_top = 42.0
+offset_right = -55.0
+offset_bottom = 81.0
 grow_horizontal = 2
 theme = ExtResource("14_ucgb7")
 text = "Chosen deck"
 horizontal_alignment = 1
 vertical_alignment = 1
+text_overrun_behavior = 3
 
-[node name="chosen_deck_2" type="ColorRect" parent="play_panel/play_info"]
+[node name="deck_hover" type="Control" parent="play_panel/play_info"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 287.0
-offset_top = 84.0
+offset_left = 47.0
+offset_top = 99.0
 offset_right = -46.0
-offset_bottom = -102.0
+offset_bottom = -135.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 1, 1)
 
-[node name="chosen_deck_1" type="ColorRect" parent="play_panel/play_info"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 46.0
-offset_top = 84.0
-offset_right = -287.0
-offset_bottom = -102.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0.0235294, 0, 1)
-
-[node name="Button" type="Button" parent="play_panel/play_info"]
+[node name="play" type="Button" parent="play_panel/play_info"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 46.0
-offset_top = -85.0
+offset_top = -118.0
 offset_right = -46.0
-offset_bottom = -26.0
+offset_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("14_ucgb7")
-text = "Play"
+text = "Play
+"
 
 [node name="deck_choser" type="ScrollContainer" parent="play_panel"]
 layout_mode = 1
@@ -500,7 +489,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 27.0
 offset_top = 80.0
-offset_right = -590.0
+offset_right = -355.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -548,6 +537,7 @@ script = ExtResource("16_2p5pw")
 metadata/gamemode = "competitive"
 
 [node name="Label" type="Label" parent="play_panel/gamemode/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 theme = ExtResource("14_ucgb7")
@@ -606,13 +596,16 @@ patch_margin_bottom = 11
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 57.0
 offset_top = 42.0
+offset_right = -57.0
 offset_bottom = 81.0
 grow_horizontal = 2
 theme = ExtResource("14_ucgb7")
 text = "Chosen deck"
 horizontal_alignment = 1
 vertical_alignment = 1
+text_overrun_behavior = 3
 
 [node name="deck_hover" type="Control" parent="deck_panel/play_info"]
 layout_mode = 1
@@ -656,6 +649,16 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("14_ucgb7")
 text = "Create"
+
+[node name="remove_button" type="Button" parent="deck_panel/play_info"]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 8.0
+offset_right = 269.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("13_73xwh")
+disabled = true
+text = "🗑️"
 
 [node name="deck_choser" type="ScrollContainer" parent="deck_panel"]
 layout_mode = 1
@@ -718,4 +721,5 @@ expand_mode = 1
 [connection signal="pressed" from="buttons_holder/right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="deck_panel/play_info/edit_button" to="deck_panel" method="_on_edit_button_pressed"]
 [connection signal="pressed" from="deck_panel/play_info/create_button" to="deck_panel" method="_on_create_button_pressed"]
+[connection signal="pressed" from="deck_panel/play_info/remove_button" to="deck_panel" method="_on_remove_button_pressed"]
 [connection signal="gui_input" from="log_out_btn" to="." method="_on_log_out_btn_gui_input"]
