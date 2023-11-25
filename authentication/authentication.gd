@@ -106,6 +106,7 @@ func signup_failed(code, message):
 
 func login_succeeded(auth_info : Dictionary):
 	var saved
+	
 	if remember_me.button_pressed:
 		saved = await Firebase.Auth.save_auth(Firebase.Auth.auth)
 	if !saved:
@@ -113,6 +114,7 @@ func login_succeeded(auth_info : Dictionary):
 	var firestore_user_collection : FirestoreCollection = Firebase.Firestore.collection("users")
 	firestore_user_collection.get_doc(auth_info.localid)
 	GameData.user_data = await firestore_user_collection.get_document
+
 	
 	get_tree().change_scene_to_file("res://title-screen/title_screen.tscn")
 

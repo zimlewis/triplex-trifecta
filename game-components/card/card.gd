@@ -62,15 +62,11 @@ func set_placed(value):
 func init_card():
 	card_name.text = card_information.name
 	card_tittle.text = "\"" + card_information.title + "\""
-	
 
-	
 	if card_information.type == "Lad":
 		stat_left.text = str(card_information.left)
 		stat_right.text = str(card_information.right)
 		stat_middle.text = str(card_information.middle)
-		
-		
 		
 		effect_bottom.get_node("icon").texture = load("res://game-components/card/bar_icon/%s.png" % card_information.effect_bottom.side)
 		effect_top.get_node("icon").texture = load("res://game-components/card/bar_icon/%s.png" % card_information.effect_top.side)
@@ -87,6 +83,14 @@ func init_card():
 		effect_right.visible = false if card_information.effect_right.stat == 0 else true
 		effect_left.visible = false if card_information.effect_left.stat == 0 else true
 		
+		stat_left.visible = true
+		stat_middle.visible = true
+		stat_right.visible = true
+		
+		stat_right.get_parent().get_node("icon").visible = true
+		stat_middle.get_parent().get_node("icon").visible = true
+		stat_left.get_parent().get_node("icon").visible = true
+		
 		stat_leader_left.visible = false
 		stat_leader_middle.visible = false
 		stat_leader_right.visible = false
@@ -101,14 +105,14 @@ func init_card():
 		stat_middle.get_parent().get_node("icon").visible = false
 		stat_left.get_parent().get_node("icon").visible = false
 		
+		stat_leader_left.visible = true
+		stat_leader_middle.visible = true
+		stat_leader_right.visible = true
+		
 		effect_bottom.visible = false
 		effect_top.visible = false
 		effect_right.visible = false
 		effect_left.visible = false
-		
-		stat_leader_left.visible = true
-		stat_leader_middle.visible = true
-		stat_leader_right.visible = true
 		
 		stat_leader_left.text = card_information.left
 		stat_leader_right.text = card_information.right
@@ -132,8 +136,10 @@ func init_card():
 	frame.texture = load("res://game-components/card/frames/frame_" + card_information.region.to_lower() + ".png")
 	ability_description.texture = load("res://game-components/card/boxes/box_" + card_information.region.to_lower() + ".png")
 	ability_description.get_node("detailed_information").texture = load("res://game-components/card/balls/slot_" + card_information.region.to_lower() + ".png")
-
+	
 
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
-	mouse_event.emit(self , event)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			mouse_event.emit(self , event)

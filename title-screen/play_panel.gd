@@ -12,6 +12,8 @@ func _ready():
 
 func set_decks(value):
 	decks = value
+	for i in $deck_choser/GridContainer.get_children():
+		i.queue_free()
 	for i in decks.duplicate():
 		var grid = Control.new()
 		grid.custom_minimum_size = grid_size
@@ -26,7 +28,7 @@ func set_decks(value):
 		deck_name.size = Vector2(147.2 , 34)
 		deck_name.position = Vector2(0 , 170.8)
 		deck_name.text = i
-		deck_name.theme = load("res://deck-builder/deck.tres")
+		deck_name.theme = load("res://title-screen/deck.tres")
 		deck_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		deck_name.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		grid.add_child(deck_name)

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c1ya8orcvpef2"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://tmh34ujj51ji"]
 
 [ext_resource type="FontFile" uid="uid://cjs2giljtia4" path="res://fonts/vinque.rg-regular.otf" id="1_mve3v"]
 
@@ -6,7 +6,7 @@
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 10
-Label/font_sizes/font_size = 40
+Label/font_sizes/font_size = 26
 Label/fonts/font = ExtResource("1_mve3v")
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 20

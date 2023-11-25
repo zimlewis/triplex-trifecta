@@ -395,6 +395,7 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="play_panel" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1501.0
 offset_top = 54.0
@@ -601,7 +602,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 11
 
-[node name="Label" type="Label" parent="deck_panel/play_info"]
+[node name="chosen_deck_name" type="Label" parent="deck_panel/play_info"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -613,7 +614,7 @@ text = "Chosen deck"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="deck_panel/play_info"]
+[node name="deck_hover" type="Control" parent="deck_panel/play_info"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -638,6 +639,7 @@ offset_bottom = -71.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("14_ucgb7")
+disabled = true
 text = "Edit"
 
 [node name="create_button" type="Button" parent="deck_panel/play_info"]
@@ -674,6 +676,7 @@ theme_override_constants/v_separation = 16
 columns = 4
 
 [node name="about_us_panel" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1486.0
 offset_top = 54.0
