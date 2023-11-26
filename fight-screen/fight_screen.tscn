@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://cifc1sl667e5a"]
+[gd_scene load_steps=11 format=3 uid="uid://cifc1sl667e5a"]
 
 [ext_resource type="PackedScene" uid="uid://okjcdlpts531" path="res://game-components/card-placement/board_placement_slot.tscn" id="1_t8g3h"]
 [ext_resource type="PackedScene" uid="uid://dxdqrhgm2bram" path="res://game-components/panning-camera/panning_camera.tscn" id="2_3y8sg"]
 [ext_resource type="PackedScene" uid="uid://cwvogqiwgp5h0" path="res://game-components/card/card.tscn" id="3_xpofw"]
+[ext_resource type="FontFile" uid="uid://cjs2giljtia4" path="res://fonts/vinque.rg-regular.otf" id="4_4xkfb"]
+[ext_resource type="Texture2D" uid="uid://c7i2nhovr5q0n" path="res://title-screen/sprites/account_bar.png" id="4_d8iuh"]
+[ext_resource type="Script" path="res://fight-screen/hud.gd" id="4_hljtq"]
+[ext_resource type="Texture2D" uid="uid://b487xeof6ouaa" path="res://398264969_2144137212596012_7250079490693374400_n.png" id="4_rkqyr"]
+[ext_resource type="Texture2D" uid="uid://cbm3omnmxfbk" path="res://fight-screen/hud/card_count.png" id="6_tufgo"]
+[ext_resource type="Texture2D" uid="uid://c2wlchf0stufa" path="res://fight-screen/hud/turn_display.png" id="7_sd7hh"]
+[ext_resource type="Texture2D" uid="uid://b8sik78k4qkxe" path="res://fight-screen/hud/pass.png" id="8_3oo24"]
 
 [node name="fight_screen" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [28.0, 70.0]
+metadata/_edit_vertical_guides_ = [154.0, 375.0, 905.0, 1126.0, 1063.0, 217.0]
 
 [node name="board" type="Node2D" parent="."]
 
@@ -279,6 +288,7 @@ position = Vector2(784, 0)
 position = Vector2(896, 0)
 
 [node name="panning_camera" parent="." instance=ExtResource("2_3y8sg")]
+visible = false
 position = Vector2(640, 360)
 zoom = Vector2(3, 3)
 limit_left = -1700
@@ -287,6 +297,169 @@ limit_right = 2780
 limit_bottom = 2420
 
 [node name="card" parent="." instance=ExtResource("3_xpofw")]
+visible = false
 position = Vector2(584, 304)
+card_id = "lad_kahn_quan_tran"
 metadata/_edit_horizontal_guides_ = [95.0]
 metadata/_edit_vertical_guides_ = [478.0]
+
+[node name="hud" type="CanvasLayer" parent="."]
+script = ExtResource("4_hljtq")
+
+[node name="enemy" type="Node" parent="hud"]
+
+[node name="enemy_banner" type="TextureRect" parent="hud/enemy"]
+offset_left = 817.0
+offset_right = 1204.0
+offset_bottom = 125.0
+texture = ExtResource("4_d8iuh")
+
+[node name="player_name" type="Label" parent="hud/enemy/enemy_banner"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 18.0
+offset_right = 309.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource("4_4xkfb")
+theme_override_font_sizes/font_size = 32
+text = "Player 2 Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="turn_count" type="Label" parent="hud/enemy/enemy_banner"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 66.0
+offset_right = 246.0
+offset_bottom = 109.0
+theme_override_fonts/font = ExtResource("4_4xkfb")
+theme_override_font_sizes/font_size = 25
+text = "5 turns left"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="card_count" type="TextureRect" parent="hud/enemy/enemy_banner"]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 70.0
+offset_right = 314.0
+offset_bottom = 110.0
+texture = ExtResource("6_tufgo")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="hud/enemy/enemy_banner/card_count"]
+layout_mode = 0
+offset_left = 6.0
+offset_right = 34.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_4xkfb")
+theme_override_font_sizes/font_size = 27
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enemy_leader" parent="hud/enemy/enemy_banner" instance=ExtResource("3_xpofw")]
+position = Vector2(314, 3)
+scale = Vector2(0.16, 0.16)
+
+[node name="player" type="Node" parent="hud"]
+
+[node name="player_hand" type="Control" parent="hud/player"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 341.0
+offset_top = -88.0
+offset_right = -341.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player_banner" type="TextureRect" parent="hud/player"]
+offset_left = 74.0
+offset_right = 461.0
+offset_bottom = 125.0
+texture = ExtResource("4_d8iuh")
+flip_h = true
+
+[node name="player_name" type="Label" parent="hud/player/player_banner"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 18.0
+offset_right = 300.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource("4_4xkfb")
+theme_override_font_sizes/font_size = 32
+text = "Player 1 Name"
+vertical_alignment = 1
+
+[node name="turn_count" type="Label" parent="hud/player/player_banner"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 66.0
+offset_right = 300.0
+offset_bottom = 109.0
+theme_override_fonts/font = ExtResource("4_4xkfb")
+theme_override_font_sizes/font_size = 25
+text = "5 turns left"
+vertical_alignment = 1
+
+[node name="card_count" type="TextureRect" parent="hud/player/player_banner"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 70.0
+offset_right = 116.0
+offset_bottom = 110.0
+texture = ExtResource("6_tufgo")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="hud/player/player_banner/card_count"]
+layout_mode = 0
+offset_left = 6.0
+offset_right = 34.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_4xkfb")
+theme_override_font_sizes/font_size = 27
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="player_leader" parent="hud/player/player_banner" instance=ExtResource("3_xpofw")]
+position = Vector2(-74, 3)
+scale = Vector2(0.16, 0.16)
+
+[node name="turn_display" type="TextureRect" parent="hud/player"]
+offset_left = 469.0
+offset_right = 809.0
+offset_bottom = 95.0
+texture = ExtResource("7_sd7hh")
+
+[node name="pass_button" type="TextureRect" parent="hud/player"]
+offset_left = 1081.0
+offset_top = 530.0
+offset_right = 1262.0
+offset_bottom = 711.0
+texture = ExtResource("8_3oo24")
+
+[node name="Label" type="Label" parent="hud/player/pass_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_4xkfb")
+theme_override_font_sizes/font_size = 51
+text = "PASS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ref" type="Sprite2D" parent="hud"]
+visible = false
+modulate = Color(1, 1, 1, 0.14902)
+texture = ExtResource("4_rkqyr")
+centered = false
+metadata/_edit_lock_ = true

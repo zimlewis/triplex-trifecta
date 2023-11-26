@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b1npak41fcitl" path="res://game-components/card/bar_icon/r.png" id="10_d4xvl"]
 [ext_resource type="Texture2D" uid="uid://bklh12fra4bxi" path="res://game-components/card/icons/Wildcardz.png" id="11_khnek"]
 [ext_resource type="Texture2D" uid="uid://l2dbt0pstjgb" path="res://game-components/card/icons/Lad.png" id="12_3fpi6"]
+[ext_resource type="Texture2D" uid="uid://bd8n73rhwmwvm" path="res://game-components/card/frames/frame_aouni.png" id="13_6fckw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qka3k"]
 shader = ExtResource("2_craub")
@@ -89,9 +90,6 @@ RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 20
 RichTextLabel/font_sizes/normal_font_size = 57
 RichTextLabel/fonts/normal_font = ExtResource("8_uxrkt")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mlvlh"]
-size = Vector2(930, 1290)
 
 [node name="card" type="Node2D"]
 script = ExtResource("1_e54oh")
@@ -189,6 +187,7 @@ offset_left = 100.0
 offset_top = 928.0
 offset_right = 820.0
 offset_bottom = 1145.0
+mouse_filter = 2
 alignment = 1
 
 [node name="description" type="RichTextLabel" parent="card_description_frame/center"]
@@ -252,7 +251,9 @@ vertical_alignment = 1
 
 [node name="frame" type="NinePatchRect" parent="."]
 offset_right = 920.0
-offset_bottom = 1280.0
+offset_bottom = 920.0
+mouse_filter = 1
+texture = ExtResource("13_6fckw")
 patch_margin_left = 41
 patch_margin_top = 49
 patch_margin_right = 41
@@ -334,13 +335,4 @@ theme = SubResource("Theme_jud80")
 text = "+2"
 horizontal_alignment = 1
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_priority = 10.0
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(465, 645)
-shape = SubResource("RectangleShape2D_mlvlh")
-debug_color = Color(1, 1, 0, 0.419608)
-
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="gui_input" from="frame" to="." method="_on_frame_gui_input"]

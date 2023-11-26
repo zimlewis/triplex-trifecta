@@ -26,6 +26,13 @@ func set_decks(value):
 			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 				if event.pressed:
 					choose_deck(i)
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+				if event.pressed:
+					var deck_to_inspect = []
+					for ii in decks[i]:
+						deck_to_inspect.append(ii)
+					GameManager.inspect(deck_to_inspect)
+					pass
 		)
 		
 		
@@ -38,6 +45,8 @@ func set_decks(value):
 		leader.card_id = leader_id
 		leader.scale *= grid_size * 0.85 / GameManager.card_size
 		leader.position.x = (grid_size.x - GameManager.card_texture_size.x * leader.scale.x) / 2
+		
+		
 		
 		
 		
@@ -54,6 +63,9 @@ func set_decks(value):
 		grid.add_child(deck_name)
 		grid.add_child(leader)
 		$deck_choser/GridContainer.add_child(grid)
+		
+		leader.state = Card.card_state.IS_DECK_LEADER
+
 
 
 
@@ -97,3 +109,4 @@ func choose_deck(deck):
 	$play_info/deck_hover.add_child(deck_leader)
 	$play_info/chosen_deck_name.text = deck
 	$play_info/play.disabled = false
+	deck_leader.state = Card.card_state.IS_DECK_LEADER

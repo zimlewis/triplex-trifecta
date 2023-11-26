@@ -8,9 +8,8 @@ size = Vector2(110, 110)
 [node name="board_placement_slot" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(64, 64)
-scale = Vector2(0.25, 0.25)
+position = Vector2(55, 55)
+scale = Vector2(0.214844, 0.214844)
 texture = ExtResource("1_d4ro4")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -20,3 +19,4 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -36)
 shape = SubResource("RectangleShape2D_g2oqv")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)

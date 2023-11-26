@@ -1,9 +1,18 @@
 extends Node2D
 class_name Card
 
+enum card_state{
+	IN_PLAY,
+	IN_HAND,
+	IN_INSPECT,
+	IN_PREVIEW,
+	IS_DECK_LEADER
+}
 
 @onready var image = $image
 @onready var frame = $frame
+
+@onready var bar = $bar
 
 @onready var stat_left = $bar/left/stat
 @onready var stat_middle = $bar/middle/stat
@@ -27,14 +36,18 @@ class_name Card
 @onready var type_icon = $card_description_frame/detailed_information/type
 @onready var region_icon = $card_description_frame/detailed_information/region
 
+
 var mouse_in_card = false;
 
-var card_id = "leader_thyena_citrious"
+
+@export var card_id = "leader_thyena_citrious"
 var card_information;
 
-var placed : bool = true : set = set_placed
+var state : card_state = card_state.IN_HAND : set = set_state 
 
 signal mouse_event(card , event)
+signal delete_inspect
+signal inspect_deck
 
 func _init():
 	scale = GameManager.card_size/GameManager.card_texture_size
@@ -42,20 +55,35 @@ func _init():
 func _ready():
 	card_information = GameData.card_database[card_id]
 	init_card()
+	state = card_state.IN_HAND
 	
+func set_state(value):
+	state = value
+	match state:
+		card_state.IN_PLAY:
+			frame.size = Vector2(920 , 920)
+			ability_description.visible = false
+			effect_all.visible = false
+			bar.visible = false if card_information.type == "Leader" else true
+			card_name.visible = false if card_information.type == "Leader" else true
+			card_tittle.visible = false if card_information.type == "Leader" else true
+		card_state.IN_HAND:
+			frame.size = Vector2(920 , 1280)
+			ability_description.visible = true
+			effect_all.visible = true
+			bar.visible = true
+			card_name.visible = true
+			card_tittle.visible = true
+		card_state.IN_PREVIEW:
+			frame.size = Vector2(920 , 1280)
+			ability_description.visible = true
+			effect_all.visible = true
+			bar.visible = true
+			card_name.visible = true
+			card_tittle.visible = true
 
 
-func set_placed(value):
-	placed = value
-	if placed:
-		frame.size = Vector2(920 , 920)
-		ability_description.visible = false
-		effect_all.visible = false
-		
-	else:
-		frame.size = Vector2(920 , 1280)
-		ability_description.visible = true
-		effect_all.visible = true
+
 
 
 
@@ -139,7 +167,48 @@ func init_card():
 	
 
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
+
+
+
+func _on_frame_gui_input(event):
+	print(event)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			mouse_event.emit(self , event)
+			if !state == card_state.IN_INSPECT:
+				mouse_event.emit(self , event)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			if state == card_state.IN_HAND or state == card_state.IN_PLAY or state == card_state.IN_PREVIEW:
+				GameManager.inspect(card_id)
+			if state == card_state.IS_DECK_LEADER:
+				inspect_deck.emit()
+			if state == Card.card_state.IN_INSPECT:
+				delete_inspect.emit()
+
+func inspect(id):
+	if id is String:
+		var inspect_layer = CanvasLayer.new()
+		var inspect_background = ColorRect.new()
+		var inspect_card = load("res://game-components/card/card.tscn").instantiate()
+		
+		var inspect_card_scale = Vector2((get_tree().current_scene.get_viewport_rect().size.y - 100) / GameManager.card_size.y , (get_tree().current_scene.get_viewport_rect().size.y - 100) / GameManager.card_size.y)
+		
+		inspect_card.card_id = card_id
+		
+		
+		inspect_background.color = Color.BLACK
+		inspect_background.color.a = 0.5
+		inspect_background.size = get_tree().current_scene.get_viewport_rect().size
+		inspect_background.mouse_filter = Control.MOUSE_FILTER_PASS
+		
+		inspect_layer.add_child(inspect_background)
+		inspect_layer.add_child(inspect_card)
+		
+		
+		get_tree().get_root().add_child(inspect_layer)
+		
+		inspect_card.scale *= inspect_card_scale
+		inspect_card.state = inspect_card.card_state.IN_INSPECT
+		inspect_card.position = GameManager.center_of_screen - GameManager.card_texture_size * inspect_card.scale / 2
+		inspect_card.delete_inspect.connect(inspect_layer.queue_free)
+		

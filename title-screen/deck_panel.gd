@@ -25,6 +25,13 @@ func set_decks(value):
 			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 				if event.pressed:
 					choose_deck(i)
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+				if event.pressed:
+					var deck_to_inspect = []
+					for ii in decks[i]:
+						deck_to_inspect.append(ii)
+					GameManager.inspect(deck_to_inspect)
+					pass
 		)
 		
 		
@@ -53,7 +60,7 @@ func set_decks(value):
 		grid.add_child(deck_name)
 		grid.add_child(leader)
 		$deck_choser/GridContainer.add_child(grid)
-		
+		leader.state = Card.card_state.IS_DECK_LEADER
 		
 		
 		
@@ -76,6 +83,7 @@ func choose_deck(deck):
 	deck_leader.scale *= $play_info/deck_hover.size / GameManager.card_size
 	
 	$play_info/deck_hover.add_child(deck_leader)
+	deck_leader.state = Card.card_state.IS_DECK_LEADER
 	$play_info/chosen_deck_name.text = deck
 	chosen_deck = deck
 	$play_info/edit_button.disabled = false
@@ -87,8 +95,6 @@ func _process(delta):
 	pass
 
 
-func select_deck(deck):
-	pass
 
 func _on_create_button_pressed():
 	var tween = get_tree().create_tween().set_parallel(true).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)

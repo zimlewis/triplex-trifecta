@@ -38,6 +38,7 @@ func _ready():
 			get_node("card/deck_selection/" + GameData.card_database[i].region + "/GridContainer").move_child(grid , 0)
 		card.scale *= grid_size / GameManager.card_size
 		card.mouse_event.connect(card_inputed)
+		card.state = Card.card_state.IN_PREVIEW
 		
 	if mode == EDIT:
 		for i in chosen_deck:
