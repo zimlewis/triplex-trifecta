@@ -27,9 +27,7 @@ func set_decks(value):
 					choose_deck(i)
 			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 				if event.pressed:
-					var deck_to_inspect = []
-					for ii in decks[i]:
-						deck_to_inspect.append(ii)
+					var deck_to_inspect = decks[i].duplicate()
 					GameManager.inspect(deck_to_inspect)
 					pass
 		)

@@ -10,6 +10,7 @@ script = ExtResource("1_cghtg")
 script = ExtResource("2_i4wnr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
 anchors_preset = 15
