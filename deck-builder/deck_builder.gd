@@ -11,8 +11,6 @@ var max_leader = 1
 var deck = []
 var chosen_deck = []
 var chosen_deck_name
-var deck_panel
-var play_panel
 
 enum {
 	EDIT,
@@ -82,29 +80,40 @@ func add_to_deck(card):
 		
 		var amount_of_added_card = get_amount_of_added_card(card)
 		
+		var card_frame = TextureRect.new()
+		card_frame.texture = load("res://gui/dbCard_" + GameData.card_database[card].type.to_lower() + ".png")
+		card_frame.size = Vector2(250 , 64)
+		card_frame.position = Vector2(0 , 0)
+		card_frame.stretch_mode = TextureRect.STRETCH_KEEP
 		
 		var card_name = Label.new()
 		card_name.name = "card_name"
 		card_name.size = Vector2(174 , 64)
-		card_name.position = Vector2(0 , 0)
+		card_name.position = Vector2(20 , 0)
 		card_name.text = GameData.card_database[card].name
 		card_name.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		card_name.theme = load("res://deck-builder/deck.tres")
+		card_name.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		
 		var card_amount = Label.new()
 		card_amount.name = "card_amount"
-		card_amount.size = Vector2(74 , 64)
+		card_amount.size = Vector2(64 , 64)
 		card_amount.position = Vector2(174 , 0)
 		card_amount.text = "x" + str(amount_of_added_card)
 		card_amount.theme = load("res://deck-builder/deck.tres")
+		card_amount.vertical_alignment = VERTICAL_ALIGNMENT_CENTER		
+		card_amount.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		
+		card_label.add_child(card_frame)
 		card_label.add_child(card_name)
 		card_label.add_child(card_amount)
 		
 		%cards.add_child(card_label)
 		if GameData.card_database[card].type == "Leader":
 			%cards.move_child(card_label , 0)
-			card_label.modulate = Color.YELLOW
+			card_name.modulate = Color.YELLOW
+			card_amount.modulate = Color.YELLOW
+			
 			
 		pass
 	else:
@@ -175,23 +184,11 @@ func _on_button_pressed():
 	await up_task.task_finished
 	firestore_collection.get_doc(Firebase.Auth.auth.localid)
 	GameData.user_data = await firestore_collection.get_document
-	deck_panel.decks = GameData.user_data.doc_fields.decks
-	play_panel.decks = GameData.user_data.doc_fields.decks
 	
 	turn_off_deck_builder()
 
 func turn_off_deck_builder():
-	var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT).set_parallel(false)
-	var cover = ColorRect.new()
-	get_tree().get_root().add_child(cover)
-	cover.position = Vector2(0 , 0)
-	cover.size = Vector2(1280 , 720)
-	cover.modulate = Color.BLACK
-	cover.modulate.a = 0
-	tween.tween_property(cover , "modulate:a" , 1 , 1)
-	tween.tween_callback(queue_free)
-	tween.tween_property(cover , "modulate:a" , 0 , 1)
-	tween.tween_callback(cover.queue_free)	
+	SceneChanger.change_scene("res://title-screen/title_screen.tscn" , "texture_fade" , "texture_fade")
 
 func _on_back_pressed():
 	turn_off_deck_builder()

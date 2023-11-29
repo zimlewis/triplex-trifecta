@@ -1,0 +1,122 @@
+[gd_scene load_steps=13 format=3 uid="uid://cn4jouwkheb5c"]
+
+[ext_resource type="Script" path="res://scene-changer/scene_changer.gd" id="1_hjl0i"]
+[ext_resource type="Animation" uid="uid://ddi3oxdeyg5rs" path="res://scene-changer/animations/black_fade.res" id="2_qjuxl"]
+[ext_resource type="Theme" uid="uid://dqjm0g80h0h8f" path="res://title-screen/title_screen_theme.tres" id="3_joxjs"]
+[ext_resource type="Texture2D" uid="uid://djxasrtvn2jct" path="res://scene-changer/texture/loadingBg.png" id="3_l8g7w"]
+[ext_resource type="Texture2D" uid="uid://dycwhwgsw7ufa" path="res://scene-changer/texture/spinnyLogo.png" id="5_57gsa"]
+[ext_resource type="Shader" path="res://game-components/card/crop.gdshader" id="6_bnsf1"]
+[ext_resource type="Texture2D" uid="uid://1em2fxu2xqq8" path="res://scene-changer/texture/loadingBar.png" id="6_t2yni"]
+[ext_resource type="Texture2D" uid="uid://b4bbdsdvqaxw1" path="res://scene-changer/texture/loadingFrame.png" id="7_ix4f7"]
+
+[sub_resource type="Animation" id="Animation_4s66p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dissolved_rect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("texture_rect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vwsfd"]
+resource_name = "texture_fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("texture_rect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4pj0s"]
+_data = {
+"RESET": SubResource("Animation_4s66p"),
+"black_fade": ExtResource("2_qjuxl"),
+"texture_fade": SubResource("Animation_vwsfd")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fveai"]
+shader = ExtResource("6_bnsf1")
+shader_parameter/crop_left = 0.0
+shader_parameter/crop_right = 0.0
+shader_parameter/crop_top = 0.0
+shader_parameter/crop_bottom = 0.0
+
+[node name="scene_changer" type="CanvasLayer"]
+script = ExtResource("1_hjl0i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4pj0s")
+}
+
+[node name="dissolved_rect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="texture_rect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_l8g7w")
+
+[node name="progress_count" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 548.0
+offset_top = 184.0
+offset_right = 548.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_joxjs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="logo" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("5_57gsa")
+
+[node name="loading" type="Node2D" parent="."]
+position = Vector2(640, 600)
+
+[node name="bar" type="Sprite2D" parent="loading"]
+material = SubResource("ShaderMaterial_fveai")
+texture = ExtResource("6_t2yni")
+
+[node name="frame" type="Sprite2D" parent="loading"]
+texture = ExtResource("7_ix4f7")

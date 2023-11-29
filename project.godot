@@ -20,6 +20,8 @@ config/icon="res://icon.png"
 GameManager="*res://game_manager.gd"
 GameData="*res://game_data.gd"
 Firebase="*res://addons/godot-firebase/firebase/firebase.tscn"
+SceneChanger="*res://scene-changer/scene_changer.tscn"
+Client="*res://client/client.gd"
 
 [display]
 

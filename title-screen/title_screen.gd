@@ -37,6 +37,7 @@ var index = 0 : set = set_index
 
 func _ready():
 	self.index = 1
+	print(GameData.user_data)
 	$account_bar/name.text = str(GameData.user_data.doc_fields.in_game_name)
 	$account_bar/lv.text = "LV: " + str(GameData.user_data.doc_fields.lv)
 	$account_bar/rank.text = "RP: " + str(GameData.user_data.doc_fields.rank)
@@ -44,9 +45,7 @@ func _ready():
 	$play_panel.decks = GameData.user_data.doc_fields.decks
 	pass
 
-func _physics_process(delta):
-#	print("input_buffer_timer.get_time_left(): {0}\nis_equal_approx(input_buffer_timer.get_time_left() , 0.0): {1}".format([input_buffer_timer.get_time_left() , is_equal_approx(input_buffer_timer.get_time_left() , 0.0)]))
-	pass
+
 func set_index(value):
 	var delta_value = index - value
 	index = value

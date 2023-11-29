@@ -171,7 +171,6 @@ func init_card():
 
 
 func _on_frame_gui_input(event):
-	print(event)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			if !state == card_state.IN_INSPECT:

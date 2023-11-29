@@ -95,28 +95,19 @@ func _process(delta):
 
 
 func _on_create_button_pressed():
-	var tween = get_tree().create_tween().set_parallel(true).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
-	var deck_builder = load("res://deck-builder/deck_builder.tscn").instantiate()
-	deck_builder.deck_panel = $"."
-	deck_builder.play_panel = $"../play_panel"
-	deck_builder.mode = deck_builder.CREATE
-	get_tree().get_root().add_child(deck_builder)
-	deck_builder.modulate.a = 0
-	tween.tween_property(deck_builder , "modulate:a" , 1 , 1)
+	var set_deck_builder_value = func(deck_builder):
+		deck_builder.mode = deck_builder.CREATE
+	var deck_builder = await SceneChanger.change_scene("res://deck-builder/deck_builder.tscn" , "texture_fade" , "texture_fade" , set_deck_builder_value)
 
 	
 
 func _on_edit_button_pressed():
-	var tween = get_tree().create_tween().set_parallel(true).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
-	var deck_builder = load("res://deck-builder/deck_builder.tscn").instantiate()
-	deck_builder.deck_panel = $"."
-	deck_builder.play_panel = $"../play_panel"
-	deck_builder.chosen_deck = decks[chosen_deck]
-	deck_builder.chosen_deck_name = chosen_deck
-	deck_builder.mode = deck_builder.EDIT
-	get_tree().get_root().add_child(deck_builder)
-	deck_builder.modulate.a = 0
-	tween.tween_property(deck_builder , "modulate:a" , 1 , 1)
+	
+	var set_deck_builder_value = func(deck_builder):
+		deck_builder.mode = deck_builder.EDIT
+		deck_builder.chosen_deck = self.decks[self.chosen_deck]
+		deck_builder.chosen_deck_name = self.chosen_deck
+	var deck_builder = await SceneChanger.change_scene("res://deck-builder/deck_builder.tscn" , "texture_fade" , "texture_fade" , set_deck_builder_value)
 
 
 func _on_remove_button_pressed():

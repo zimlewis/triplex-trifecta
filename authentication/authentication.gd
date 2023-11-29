@@ -55,7 +55,7 @@ func _ready():
 		firestore_user_collection.get_doc(Firebase.Auth.auth.localid)
 		GameData.user_data = await firestore_user_collection.get_document
 		
-		get_tree().change_scene_to_file("res://title-screen/title_screen.tscn")
+		SceneChanger.change_scene("res://title-screen/title_screen.tscn" , "texture_fade" , "texture_fade")
 
 		
 	login_button.connect("pressed" , login_pressed)
@@ -116,7 +116,7 @@ func login_succeeded(auth_info : Dictionary):
 	GameData.user_data = await firestore_user_collection.get_document
 
 	
-	get_tree().change_scene_to_file("res://title-screen/title_screen.tscn")
+	SceneChanger.change_scene("res://title-screen/title_screen.tscn" , "texture_fade" , "texture_fade")
 
 func login_failed(code , message : String):
 	error_login_label.text = str(code) + ": " + message

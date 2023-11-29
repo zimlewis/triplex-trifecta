@@ -6,8 +6,8 @@ var card_size = Vector2(110 , 153)
 var card_texture_size = Vector2(920 , 1280)
 
 func _process(delta):
-	
-	center_of_screen = get_tree().current_scene.get_viewport_rect().size / 2
+	if get_tree().current_scene != null:
+		center_of_screen = get_tree().current_scene.get_viewport_rect().size / 2
 
 
 func inspect(id):
@@ -44,7 +44,7 @@ func inspect(id):
 		
 		
 		inspect_card.scale *= inspect_card_scale
-		inspect_card.state = inspect_card.card_state.IN_INSPECT
+		inspect_card.state = Card.card_state.IN_INSPECT
 		inspect_card.position = center_of_screen - card_texture_size * inspect_card.scale / 2
 		inspect_card.delete_inspect.connect(inspect_layer.queue_free)
 		
@@ -72,7 +72,7 @@ func inspect(id):
 			
 			
 			inspect_card.scale *= inspect_card_scale * 0.5
-			inspect_card.state = inspect_card.card_state.IN_INSPECT
+			inspect_card.state = Card.card_state.IN_PREVIEW
 			inspect_card.delete_inspect.connect(inspect_layer.queue_free)
 			grid.custom_minimum_size = inspect_card.scale * card_texture_size
 			

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://331anulc78jc" path="res://title-screen/bg1_background.png" id="2_oevnh"]
 [ext_resource type="Texture2D" uid="uid://dmrb750g3qss6" path="res://title-screen/bg1_ground.png" id="3_h3ro1"]
 [ext_resource type="Texture2D" uid="uid://dyq5cmtdwvsu1" path="res://title-screen/bg1_frontground.png" id="4_v0ixk"]
-[ext_resource type="Texture2D" uid="uid://byccpumlhv8a" path="res://title-screen/sprites/border_frame.png" id="6_dmfvd"]
+[ext_resource type="Texture2D" uid="uid://jg145crrfwnb" path="res://title-screen/sprites/buttonsBar_full.png" id="6_7benq"]
 [ext_resource type="Texture2D" uid="uid://kb8f1jymwcc1" path="res://title-screen/sprites/aboutUs.png" id="7_35krj"]
 [ext_resource type="Shader" path="res://title-screen/glitch.gdshader" id="7_hr5x3"]
 [ext_resource type="Texture2D" uid="uid://dm331mjla3t53" path="res://title-screen/sprites/aboutUsT.png" id="8_ep1c2"]
@@ -90,7 +90,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ftpve")
-metadata/_edit_horizontal_guides_ = [86.0, 577.0]
+metadata/_edit_horizontal_guides_ = [86.0, 577.0, 623.0]
 metadata/_edit_vertical_guides_ = [2468.0, 1024.0]
 
 [node name="title_image" type="Control" parent="."]
@@ -147,7 +147,7 @@ texture = ExtResource("4_v0ixk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="buttons_holder" type="NinePatchRect" parent="."]
+[node name="buttons_holder" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -158,11 +158,7 @@ offset_top = -100.0
 offset_right = -278.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("6_dmfvd")
-patch_margin_left = 88
-patch_margin_top = 10
-patch_margin_right = 88
-patch_margin_bottom = 12
+texture = ExtResource("6_7benq")
 
 [node name="first_button" type="Control" parent="buttons_holder"]
 unique_name_in_owner = true
@@ -313,43 +309,30 @@ stretch_mode = 5
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = 31.0
-offset_right = 179.0
-offset_bottom = 41.0
+offset_left = 95.0
+offset_top = 10.0
+offset_right = 295.0
+offset_bottom = 125.0
 grow_vertical = 2
 scale = Vector2(0.415, 0.415)
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_bc5bb")
+stretch_mode = 3
 flip_h = true
 
 [node name="right" type="TextureButton" parent="buttons_holder"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = 610.0
-offset_top = 31.0
-offset_right = 725.0
-offset_bottom = 41.0
+offset_left = 671.0
+offset_top = 10.0
+offset_right = 871.0
+offset_bottom = 125.0
 grow_vertical = 2
 scale = Vector2(0.415, 0.415)
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_bc5bb")
-
-[node name="ColorRect" type="ColorRect" parent="buttons_holder"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+stretch_mode = 3
 
 [node name="account_bar" type="TextureRect" parent="."]
 layout_mode = 0
@@ -478,6 +461,7 @@ offset_right = -46.0
 offset_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_mode = 0
 theme = ExtResource("14_ucgb7")
 text = "Play
 "
@@ -631,6 +615,7 @@ offset_right = -46.0
 offset_bottom = -71.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_mode = 0
 theme = ExtResource("14_ucgb7")
 disabled = true
 text = "Edit"
@@ -647,15 +632,18 @@ offset_right = -46.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_mode = 0
 theme = ExtResource("14_ucgb7")
 text = "Create"
 
 [node name="remove_button" type="Button" parent="deck_panel/play_info"]
 layout_mode = 0
-offset_left = 226.0
-offset_top = 8.0
-offset_right = 269.0
-offset_bottom = 51.0
+offset_left = 217.0
+offset_top = 5.0
+offset_right = 272.297
+offset_bottom = 67.8103
+focus_mode = 0
+theme = ExtResource("14_ucgb7")
 theme_override_fonts/font = ExtResource("13_73xwh")
 disabled = true
 text = "🗑️"
@@ -719,6 +707,7 @@ expand_mode = 1
 [connection signal="gui_input" from="buttons_holder/third_button" to="." method="_on_third_button_gui_input"]
 [connection signal="pressed" from="buttons_holder/left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="buttons_holder/right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="play_panel/play_info/play" to="play_panel" method="_on_play_pressed"]
 [connection signal="pressed" from="deck_panel/play_info/edit_button" to="deck_panel" method="_on_edit_button_pressed"]
 [connection signal="pressed" from="deck_panel/play_info/create_button" to="deck_panel" method="_on_create_button_pressed"]
 [connection signal="pressed" from="deck_panel/play_info/remove_button" to="deck_panel" method="_on_remove_button_pressed"]

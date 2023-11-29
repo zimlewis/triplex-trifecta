@@ -4,6 +4,7 @@ extends NinePatchRect
 var chosen_mode : String : set = set_chosen_mode
 var decks : set = set_decks
 var grid_size = Vector2(147.2 , 204.8)
+var chosen_deck
 
 func _ready():
 	chosen_mode = "unrated"
@@ -108,3 +109,11 @@ func choose_deck(deck):
 	$play_info/chosen_deck_name.text = deck
 	$play_info/play.disabled = false
 	deck_leader.state = Card.card_state.IS_DECK_LEADER
+	
+	chosen_deck = deck
+
+
+func _on_play_pressed():
+	var set_queue_scene_value = func(queue_scene):
+		queue_scene.chosen_deck = self.decks[self.chosen_deck]
+	await SceneChanger.change_scene("res://match-queue/match_queue.tscn" , "texture_fade" , "texture_fade" , set_queue_scene_value)
