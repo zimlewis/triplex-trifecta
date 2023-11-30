@@ -73,6 +73,7 @@ func register_pressed():
 		error_register_label.text = "password does not match"
 		return
 	
+	disable_form()
 	Firebase.Auth.signup_with_email_and_password(register_email.text , register_password.text)
 	enable_form()
 
@@ -81,13 +82,13 @@ func signup_succeeded(auth_info : Dictionary):
 	Firebase.Auth.update_account(auth_info.idtoken , register_username.text , "" , [] , true)
 	var firestore_user_collection : FirestoreCollection = Firebase.Firestore.collection("users")
 	var add_task : FirestoreTask = firestore_user_collection.add(auth_info.localid , {
-		"lv" : 0 , 
-		"rank" : 0 , 
-		"exp" : 0 , 
-		"in_game_name" : register_username.text , 
-		"email" : auth_info.email , 
+		"lv" : 0, 
+		"rank" : 0, 
+		"elo" : 0,
+		"exp" : 0, 
+		"in_game_name" : register_username.text, 
+		"email" : auth_info.email, 
 		"decks":{
-			"default" : []
 		}
 	})
 	await add_task.task_finished

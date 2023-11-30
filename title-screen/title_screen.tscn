@@ -520,6 +520,16 @@ vertical_alignment = 1
 script = ExtResource("16_2p5pw")
 metadata/gamemode = "competitive"
 
+[node name="Label4" type="Label" parent="play_panel/gamemode/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme = ExtResource("14_ucgb7")
+text = "Challenge"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("16_2p5pw")
+metadata/gamemode = "challenge"
+
 [node name="Label" type="Label" parent="play_panel/gamemode/HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(100, 50)
@@ -667,7 +677,6 @@ theme_override_constants/v_separation = 16
 columns = 4
 
 [node name="about_us_panel" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 1486.0
 offset_top = 54.0

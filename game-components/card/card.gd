@@ -53,7 +53,6 @@ func _init():
 	scale = GameManager.card_size/GameManager.card_texture_size
 
 func _ready():
-	card_information = GameData.card_database[card_id]
 	init_card()
 	state = card_state.IN_HAND
 	
@@ -88,6 +87,7 @@ func set_state(value):
 
 
 func init_card():
+	card_information = GameData.card_database[card_id]
 	card_name.text = card_information.name
 	card_tittle.text = "\"" + card_information.title + "\""
 

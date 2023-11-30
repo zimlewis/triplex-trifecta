@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cifc1sl667e5a"]
+[gd_scene load_steps=12 format=3 uid="uid://cifc1sl667e5a"]
 
+[ext_resource type="Script" path="res://fight-screen/fight_screen.gd" id="1_dd4c2"]
 [ext_resource type="PackedScene" uid="uid://okjcdlpts531" path="res://game-components/card-placement/board_placement_slot.tscn" id="1_t8g3h"]
 [ext_resource type="PackedScene" uid="uid://dxdqrhgm2bram" path="res://game-components/panning-camera/panning_camera.tscn" id="2_3y8sg"]
 [ext_resource type="PackedScene" uid="uid://cwvogqiwgp5h0" path="res://game-components/card/card.tscn" id="3_xpofw"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b8sik78k4qkxe" path="res://fight-screen/hud/pass.png" id="8_3oo24"]
 
 [node name="fight_screen" type="Node2D"]
+script = ExtResource("1_dd4c2")
 metadata/_edit_horizontal_guides_ = [28.0, 70.0]
 metadata/_edit_vertical_guides_ = [154.0, 375.0, 905.0, 1126.0, 1063.0, 217.0]
 
@@ -299,7 +301,6 @@ limit_bottom = 2420
 [node name="card" parent="." instance=ExtResource("3_xpofw")]
 visible = false
 position = Vector2(584, 304)
-card_id = "lad_kahn_quan_tran"
 metadata/_edit_horizontal_guides_ = [95.0]
 metadata/_edit_vertical_guides_ = [478.0]
 
@@ -314,7 +315,7 @@ offset_right = 1204.0
 offset_bottom = 125.0
 texture = ExtResource("4_d8iuh")
 
-[node name="player_name" type="Label" parent="hud/enemy/enemy_banner"]
+[node name="enemy_name" type="Label" parent="hud/enemy/enemy_banner"]
 layout_mode = 0
 offset_left = 88.0
 offset_top = 18.0

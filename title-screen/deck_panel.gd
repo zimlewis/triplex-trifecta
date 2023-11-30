@@ -1,5 +1,7 @@
 extends NinePatchRect
 
+signal recieve_from_server
+
 var grid_size = Vector2(147.2 , 204.8)
 var initialized = false
 
@@ -17,7 +19,10 @@ func set_decks(value):
 	decks = value
 	for i in $deck_choser/GridContainer.get_children():
 		i.queue_free()
+	
+	
 	for i in decks.duplicate():
+		print("deck l: " + i)
 		var grid = Control.new()
 		grid.custom_minimum_size = grid_size
 		grid.name = i

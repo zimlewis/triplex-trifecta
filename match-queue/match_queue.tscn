@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci1so6kcliy6q"]
+[gd_scene load_steps=6 format=3 uid="uid://ci1so6kcliy6q"]
 
 [ext_resource type="Script" path="res://match-queue/match_queue.gd" id="1_2ssws"]
 [ext_resource type="Texture2D" uid="uid://djxasrtvn2jct" path="res://scene-changer/texture/loadingBg.png" id="1_teyxx"]
 [ext_resource type="Texture2D" uid="uid://dycwhwgsw7ufa" path="res://scene-changer/texture/spinnyLogo.png" id="2_sgqb1"]
 [ext_resource type="Theme" uid="uid://dqjm0g80h0h8f" path="res://title-screen/title_screen_theme.tres" id="3_4sxq6"]
+[ext_resource type="FontFile" uid="uid://cjs2giljtia4" path="res://fonts/vinque.rg-regular.otf" id="5_e8q0i"]
 
 [node name="match_queue" type="Control"]
 layout_mode = 3
@@ -13,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2ssws")
+metadata/_edit_vertical_guides_ = [435.0, 845.0, 640.0]
 
 [node name="texture_rect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -24,54 +26,100 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("1_teyxx")
 
-[node name="logo" type="Sprite2D" parent="."]
+[node name="normal_mode" type="Node2D" parent="."]
+visible = false
+
+[node name="logo" type="Sprite2D" parent="normal_mode"]
 position = Vector2(640, 360)
 texture = ExtResource("2_sgqb1")
 
-[node name="queue_label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
+[node name="queue_label" type="Label" parent="normal_mode"]
 offset_top = 38.0
+offset_right = 1280.0
 offset_bottom = 162.0
-grow_horizontal = 2
 theme = ExtResource("3_4sxq6")
+theme_override_fonts/font = ExtResource("5_e8q0i")
 theme_override_font_sizes/font_size = 100
-text = "IN QUEUE"
+text = "IN QUEUE..."
 horizontal_alignment = 1
 
-[node name="queue_time" type="Label" parent="."]
-layout_mode = 1
+[node name="queue_time" type="Label" parent="normal_mode"]
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 196.5
-offset_bottom = 249.5
+offset_top = 544.0
+offset_right = 1280.0
+offset_bottom = 597.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_e8q0i")
 theme_override_font_sizes/font_size = 36
 text = "00:00"
 horizontal_alignment = 1
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
+[node name="Timer" type="Timer" parent="normal_mode"]
 
-[node name="cancel" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+[node name="cancel" type="Button" parent="normal_mode"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 549.0
-offset_top = -91.0
-offset_right = -549.0
-offset_bottom = -28.0
+offset_left = 556.0
+offset_top = 605.0
+offset_right = 724.0
+offset_bottom = 668.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 focus_mode = 0
 theme = ExtResource("3_4sxq6")
 text = "Cancel"
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="cancel" to="." method="_on_cancel_pressed"]
+[node name="challenge_mode" type="Node2D" parent="."]
+
+[node name="create" type="Button" parent="challenge_mode"]
+offset_left = 435.0
+offset_top = 371.0
+offset_right = 640.0
+offset_bottom = 435.0
+focus_mode = 0
+theme = ExtResource("3_4sxq6")
+text = "Create"
+
+[node name="join" type="Button" parent="challenge_mode"]
+offset_left = 640.0
+offset_top = 371.0
+offset_right = 845.0
+offset_bottom = 435.0
+focus_mode = 0
+theme = ExtResource("3_4sxq6")
+disabled = true
+text = "Join"
+
+[node name="cancel" type="Button" parent="challenge_mode"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 435.0
+offset_top = 444.0
+offset_right = 845.0
+offset_bottom = 507.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme = ExtResource("3_4sxq6")
+text = "Cancel"
+
+[node name="LineEdit" type="LineEdit" parent="challenge_mode"]
+offset_left = 445.0
+offset_top = 313.0
+offset_right = 835.0
+offset_bottom = 357.0
+theme = ExtResource("3_4sxq6")
+text = "sadasdasdas"
+
+[connection signal="timeout" from="normal_mode/Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="normal_mode/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="challenge_mode/create" to="." method="_on_create_pressed"]
+[connection signal="pressed" from="challenge_mode/join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="challenge_mode/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="text_changed" from="challenge_mode/LineEdit" to="." method="_on_line_edit_text_changed"]
