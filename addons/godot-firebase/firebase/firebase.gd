@@ -45,13 +45,13 @@ const _AUTH_PROVIDERS : String = "firebase/auth_providers"
 # These values can be found in your Firebase Project
 # See the README checked Github for how to access
 var _config : Dictionary = {
-	"apiKey": "",
-	"authDomain": "",
+	"apiKey": "AIzaSyBbdVqo-Q5VrCQtpM_qqduPhChvo99tJqw",
+	"authDomain": "triplex-trifecta.firebaseapp.com",
 	"databaseURL": "",
-	"projectId": "",
-	"storageBucket": "",
-	"messagingSenderId": "",
-	"appId": "",
+	"projectId": "triplex-trifecta",
+	"storageBucket": "triplex-trifecta.appspot.com",
+	"messagingSenderId": "103538959814",
+	"appId": "1:103538959814:web:dab03bcb9abc4feb507ec7",
 	"measurementId": "",
 	"clientId": "",
 	"clientSecret" : "",

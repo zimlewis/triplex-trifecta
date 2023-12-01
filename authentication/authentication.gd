@@ -96,7 +96,6 @@ func signup_succeeded(auth_info : Dictionary):
 	register_email.text = ""
 	register_password.text = ""
 	register_password_confirm.text = ""
-	$form.current_tab = 0
 	pass
 
 func signup_failed(code, message):
@@ -127,3 +126,34 @@ func login_failed(code , message : String):
 #
 #func logged_out():
 #	pass
+
+
+
+
+
+func _on_rg_pressed():
+	for i in [$form/login/email, $form/login/password]:
+		i.editable = false
+	for i in [%btn_login, $form/login/rg]:
+		i.disabled = true
+	
+	for i in [$form/register/username, $form/register/email, $form/register/password, $form/register/password_confirm]:
+		i.editable = true
+	for i in [%btn_register, $form/register/lg]:
+		i.disabled = false
+	$form/login.visible = false
+	$form/register.visible = true
+
+
+func _on_lg_pressed():
+	for i in [$form/login/email, $form/login/password]:
+		i.editable = true
+	for i in [%btn_login, $form/login/rg]:
+		i.disabled = false
+	
+	for i in [$form/register/username, $form/register/email, $form/register/password, $form/register/password_confirm]:
+		i.editable = false
+	for i in [%btn_register, $form/register/lg]:
+		i.disabled = true
+	$form/login.visible = true
+	$form/register.visible = false

@@ -115,7 +115,6 @@ offset_top = 313.0
 offset_right = 835.0
 offset_bottom = 357.0
 theme = ExtResource("3_4sxq6")
-text = "sadasdasdas"
 
 [connection signal="timeout" from="normal_mode/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="normal_mode/cancel" to="." method="_on_cancel_pressed"]
