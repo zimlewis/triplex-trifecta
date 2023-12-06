@@ -67,13 +67,13 @@ func _on_create_pressed():
 		"client_id" : Client.peer_id,
 		"deck" : JSON.stringify(chosen_deck),
 		"player_id" : GameData.user_data.doc_name,
+		"player_name" : GameData.user_data.doc_fields.in_game_name,
 		"lobby" : "create new lobby"
 	}
 	
 	Client.send_to_server(queue_request_message)
 
 func on_receive_data(data):
-	print(data)
 	if data.message == Client.Message.LOBBY:
 		if data.state == "create":
 			$challenge_mode/LineEdit.editable = false
@@ -82,9 +82,13 @@ func on_receive_data(data):
 			var set_play_value = func(fight_scene):
 				fight_scene.data = data
 			await SceneChanger.change_scene("res://fight-screen/fight_screen.tscn" , "texture_fade" , "texture_fade" , set_play_value)
+			
 
+			
 			pass
 	pass
+
+
 
 func _on_join_pressed():
 	$challenge_mode/create.disabled = true
@@ -95,6 +99,7 @@ func _on_join_pressed():
 			"client_id" : Client.peer_id,
 			"deck" : JSON.stringify(chosen_deck),
 			"player_id" : GameData.user_data.doc_name,
+			"player_name" : GameData.user_data.doc_fields.in_game_name,
 			"lobby" : $challenge_mode/LineEdit.text
 		}
 		

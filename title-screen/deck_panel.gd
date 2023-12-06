@@ -22,7 +22,6 @@ func set_decks(value):
 	
 	
 	for i in decks.duplicate():
-		print("deck l: " + i)
 		var grid = Control.new()
 		grid.custom_minimum_size = grid_size
 		grid.name = i
@@ -74,6 +73,7 @@ func _ready():
 	pass
 
 func choose_deck(deck):
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	if $play_info/deck_hover.get_child(0) != null:
 		$play_info/deck_hover.get_child(0).queue_free()
 	var deck_leader = load("res://game-components/card/card.tscn").instantiate()
@@ -100,6 +100,7 @@ func _process(delta):
 
 
 func _on_create_button_pressed():
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	var set_deck_builder_value = func(deck_builder):
 		deck_builder.mode = deck_builder.CREATE
 	var deck_builder = await SceneChanger.change_scene("res://deck-builder/deck_builder.tscn" , "texture_fade" , "texture_fade" , set_deck_builder_value)
@@ -107,7 +108,7 @@ func _on_create_button_pressed():
 	
 
 func _on_edit_button_pressed():
-	
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	var set_deck_builder_value = func(deck_builder):
 		deck_builder.mode = deck_builder.EDIT
 		deck_builder.chosen_deck = self.decks[self.chosen_deck]
@@ -116,6 +117,7 @@ func _on_edit_button_pressed():
 
 
 func _on_remove_button_pressed():
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	var firestore_collection = Firebase.Firestore.collection("users")
 	var had_decks = GameData.user_data.doc_fields.decks
 	

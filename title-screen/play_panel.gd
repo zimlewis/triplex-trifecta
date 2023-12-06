@@ -27,10 +27,12 @@ func set_decks(value):
 			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 				if event.pressed:
 					choose_deck(i)
+					GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 				if event.pressed:
 					var deck_to_inspect = decks[i].duplicate()
 					GameManager.inspect(deck_to_inspect)
+					
 					pass
 		)
 		
@@ -74,6 +76,7 @@ func _on_menu_inputed(event , sender):
 	if event is InputEventMouseButton:
 		if event.button_mask == MOUSE_BUTTON_LEFT:
 			self.chosen_mode = sender.get_meta("gamemode")
+			GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 
 func set_chosen_mode(value):
 	var tween = create_tween()
@@ -114,6 +117,7 @@ func choose_deck(deck):
 
 
 func _on_play_pressed():
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	var set_queue_scene_value = func(queue_scene):
 		queue_scene.chosen_deck = self.decks[self.chosen_deck]
 		queue_scene.gamemode = self.chosen_mode

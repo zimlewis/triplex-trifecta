@@ -47,6 +47,7 @@ func _ready():
 
 func card_inputed(card , event):
 	add_to_deck(card.card_id)
+	
 
 
 func add_to_deck(card):
@@ -63,7 +64,8 @@ func add_to_deck(card):
 			if GameData.card_database[i].type == "Lad":
 				lad_count += 1
 		if lad_count + 1 > max_lad:return
-		
+	
+	GameManager.play_sound_effect("res://sound-effect/gui_db_addcard.wav")
 	deck.append(card)
 	var card_label = get_node("selected_card/ScrollContainer/cards").get_node(card)
 	if card_label == null:
@@ -74,6 +76,7 @@ func add_to_deck(card):
 			func(event):
 				if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 					if event.pressed:
+						
 						remove_from_deck(card)
 				pass
 		)
@@ -122,7 +125,7 @@ func add_to_deck(card):
 		var card_amount = card_label.get_node("card_amount")
 		card_amount.name = "card_amount"
 		card_amount.text = "x" + str(amount_of_added_card)
-		pass
+
 
 func get_amount_of_added_card(card_id):
 	var amount_of_added_card = 0
@@ -134,6 +137,7 @@ func get_amount_of_added_card(card_id):
 	return amount_of_added_card
 
 func remove_from_deck(card):
+	GameManager.play_sound_effect("res://sound-effect/gui_db_delcard.wav")
 	var index = deck.find(card , 0)
 	if index != -1:
 		deck.pop_at(index)
@@ -147,7 +151,7 @@ func remove_from_deck(card):
 		return
 	
 	card_label.get_node("card_amount").text = "x" + str(amount_of_added_card)
-
+	GameManager.play_sound_effect("res://sound-effect/gui_db_delcard.wav")
 
 func _on_button_pressed():
 	$selected_card/Button.disabled = true
@@ -165,7 +169,7 @@ func _on_button_pressed():
 	
 	if deck_name == "": return
 	
-	
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	var firestore_collection = Firebase.Firestore.collection("users")
 	var had_decks = GameData.user_data.doc_fields.decks
 
@@ -185,11 +189,21 @@ func _on_button_pressed():
 	firestore_collection.get_doc(Firebase.Auth.auth.localid)
 	GameData.user_data = await firestore_collection.get_document
 	
+	
 	turn_off_deck_builder()
 
 func turn_off_deck_builder():
 	SceneChanger.change_scene("res://title-screen/title_screen.tscn" , "texture_fade" , "texture_fade")
 
 func _on_back_pressed():
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	turn_off_deck_builder()
 	
+
+
+func _on_deck_selection_tab_button_pressed(tab):
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
+
+
+func _on_deck_selection_tab_clicked(tab):
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")

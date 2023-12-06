@@ -5,10 +5,28 @@ var center_of_screen
 var card_size = Vector2(110 , 153)
 var card_texture_size = Vector2(920 , 1280)
 
+func _ready():
+	AudioServer.set_bus_volume_db(
+		0,
+		linear_to_db(0.5)
+	)
+	AudioServer.set_bus_volume_db(
+		1,
+		linear_to_db(0.5)
+	)
+	AudioServer.set_bus_volume_db(
+		2,
+		linear_to_db(0.5)
+	)
+
 func _process(delta):
 	if get_tree().current_scene != null:
 		center_of_screen = get_tree().current_scene.get_viewport_rect().size / 2
 
+func show_title_setting():
+	var setting = load("res://settings/title-screen-settings/title_screen_setting.tscn").instantiate()
+	get_tree().current_scene.add_child(setting)
+	pass
 
 func inspect(id):
 	var inspect_layer = CanvasLayer.new()
@@ -31,6 +49,7 @@ func inspect(id):
 	get_tree().get_root().add_child(inspect_layer)
 	inspect_layer.add_child(inspect_background)
 	
+	play_sound_effect("res://sound-effect/game_inspect.wav")
 	
 	if id is String:
 		var inspect_card = load("res://game-components/card/card.tscn").instantiate()
@@ -82,7 +101,18 @@ func inspect(id):
 		scroll_container.size = Vector2(1280 , 330)
 		scroll_container.position = Vector2(0 , 150)
 		
-
+func play_sound_effect(sound_path):
+	var audio = AudioStreamPlayer.new()
+	
+	audio.stream = load(sound_path)
+	audio.bus = "SFX"
+	
+	get_tree().root.add_child(audio)
+	
+	audio.play()
+	
+	audio.finished.connect(audio.queue_free)
+	pass
 	
 	
 	

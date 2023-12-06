@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwc7vtp4uad5g"]
+
+[ext_resource type="Script" path="res://settings/title-screen-settings/title_screen_setting.gd" id="1_uf4jg"]
+[ext_resource type="PackedScene" uid="uid://bg5oj13s5itr3" path="res://settings/volume-settings/volume_slider.tscn" id="1_wvxt4"]
+[ext_resource type="Theme" uid="uid://c1ya8orcvpef2" path="res://deck-builder/deck.tres" id="3_0bid7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6nem"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="title_screen_setting" type="CanvasLayer"]
+script = ExtResource("1_uf4jg")
+
+[node name="bg" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.384314)
+
+[node name="setting_panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 205.0
+offset_top = 115.0
+offset_right = -205.0
+offset_bottom = -115.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6nem")
+
+[node name="volume" type="VBoxContainer" parent="setting_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 212.0
+offset_top = 93.0
+offset_right = -212.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="master_label" type="Label" parent="setting_panel/volume"]
+layout_mode = 2
+text = "Master"
+
+[node name="master" parent="setting_panel/volume" instance=ExtResource("1_wvxt4")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="music_label" type="Label" parent="setting_panel/volume"]
+layout_mode = 2
+text = "Music
+"
+
+[node name="music" parent="setting_panel/volume" instance=ExtResource("1_wvxt4")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="sfx_label" type="Label" parent="setting_panel/volume"]
+layout_mode = 2
+text = "SFX"
+
+[node name="sfx" parent="setting_panel/volume" instance=ExtResource("1_wvxt4")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="close" type="Button" parent="setting_panel"]
+layout_mode = 0
+offset_left = 835.0
+offset_right = 870.0
+offset_bottom = 35.0
+text = "x"
+
+[node name="logout" type="Button" parent="setting_panel"]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 429.0
+offset_right = 823.0
+offset_bottom = 470.0
+text = "Logout"
+
+[node name="Label" type="Label" parent="setting_panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 32.0
+offset_bottom = 85.0
+grow_horizontal = 2
+theme = ExtResource("3_0bid7")
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1

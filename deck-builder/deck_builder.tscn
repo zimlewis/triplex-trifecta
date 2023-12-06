@@ -178,4 +178,6 @@ theme = ExtResource("2_eh0ri")
 text = "<< Back"
 
 [connection signal="pressed" from="selected_card/Button" to="." method="_on_button_pressed"]
+[connection signal="tab_button_pressed" from="card/deck_selection" to="." method="_on_deck_selection_tab_button_pressed"]
+[connection signal="tab_clicked" from="card/deck_selection" to="." method="_on_deck_selection_tab_clicked"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

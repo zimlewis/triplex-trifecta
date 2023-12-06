@@ -464,3 +464,5 @@ modulate = Color(1, 1, 1, 0.14902)
 texture = ExtResource("4_rkqyr")
 centered = false
 metadata/_edit_lock_ = true
+
+[connection signal="gui_input" from="hud/player/pass_button" to="." method="_on_pass_button_gui_input"]

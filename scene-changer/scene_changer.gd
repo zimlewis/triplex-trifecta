@@ -31,6 +31,7 @@ func on_finished_loading_scene():
 	$loading.visible = false
 	$logo.visible = false
 	tween.kill()
+	$dissolved_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	pass
 
 func _process(delta):
@@ -42,6 +43,8 @@ func _process(delta):
 		finished_loading_scene.emit()
 
 func change_scene(target : String , in_animation : String , out_animation : String , set_value_lambda = null):
+	$dissolved_rect.mouse_filter = Control.MOUSE_FILTER_STOP
+	
 	$loading/bar.material.set_shader_parameter("crop_right" , 1)
 	$loading.visible = true
 	$logo.visible = true

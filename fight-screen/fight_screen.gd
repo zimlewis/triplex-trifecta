@@ -15,6 +15,7 @@ var data
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	for i in JSON.parse_string(data.players):
 		if i != str(Client.peer_id):
 			enemy_peer_id = i
@@ -33,17 +34,17 @@ func _ready():
 	$hud/enemy/enemy_banner/enemy_leader.init_card()
 	$hud/player/player_banner/player_leader.init_card()
 	
-	var firestore_user_collection : FirestoreCollection = Firebase.Firestore.collection("users")
-	firestore_user_collection.get_doc(JSON.parse_string(data.players)[str(Client.peer_id)].player_id)
-
-	var player_data = await firestore_user_collection.get_document
-	player_name = player_data.doc_fields.in_game_name
+#	var firestore_user_collection : FirestoreCollection = Firebase.Firestore.collection("users")
+#	firestore_user_collection.get_doc(JSON.parse_string(data.players)[str(Client.peer_id)].player_id)
+#	var player_data = await firestore_user_collection.get_document
+#	firestore_user_collection.get_doc(JSON.parse_string(data.players)[enemy_peer_id].player_id)
+#	var enemy_data = await firestore_user_collection.get_document
+	
 
 	
-	firestore_user_collection.get_doc(JSON.parse_string(data.players)[enemy_peer_id].player_id)
+	player_name = JSON.parse_string(data.players)[str(Client.peer_id)].player_name
+	enemy_name = JSON.parse_string(data.players)[enemy_peer_id].player_name
 	
-	var enemy_data = await firestore_user_collection.get_document
-	enemy_name = enemy_data.doc_fields.in_game_name
 	
 	$hud/enemy/enemy_banner/enemy_name.text = enemy_name
 	$hud/player/player_banner/player_name.text = player_name
@@ -54,3 +55,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_pass_button_gui_input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			ping.rpc()
+
+@rpc("any_peer")
+func ping():
+	print("ping from " + str(multiplayer.get_remote_sender_id()))

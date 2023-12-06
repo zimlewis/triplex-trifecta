@@ -65,7 +65,7 @@ func _ready():
 func login_pressed():
 	disable_form()
 	await Firebase.Auth.login_with_email_and_password(login_email.text , login_password.text)
-	enable_form()
+
 
 
 func register_pressed():
@@ -75,7 +75,7 @@ func register_pressed():
 	
 	disable_form()
 	Firebase.Auth.signup_with_email_and_password(register_email.text , register_password.text)
-	enable_form()
+
 
 
 func signup_succeeded(auth_info : Dictionary):
@@ -96,10 +96,12 @@ func signup_succeeded(auth_info : Dictionary):
 	register_email.text = ""
 	register_password.text = ""
 	register_password_confirm.text = ""
+	enable_form()
 	pass
 
 func signup_failed(code, message):
 	error_register_label.text = str(code) + ": " + message
+	enable_form()
 	pass
 
 
@@ -117,9 +119,11 @@ func login_succeeded(auth_info : Dictionary):
 
 	
 	SceneChanger.change_scene("res://title-screen/title_screen.tscn" , "texture_fade" , "texture_fade")
-
+  
 func login_failed(code , message : String):
 	error_login_label.text = str(code) + ": " + message
+	enable_form()
+
 	
 #func userdata_received(auth_info : FirebaseUserData):
 #	pass

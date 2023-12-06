@@ -37,12 +37,13 @@ var index = 0 : set = set_index
 
 func _ready():
 	self.index = 1
-	print(GameData.user_data)
 	$account_bar/name.text = str(GameData.user_data.doc_fields.in_game_name)
 	$account_bar/lv.text = "LV: " + str(GameData.user_data.doc_fields.lv)
 	$account_bar/rank.text = "RP: " + str(GameData.user_data.doc_fields.rank)
 	$deck_panel.decks = GameData.user_data.doc_fields.decks
 	$play_panel.decks = GameData.user_data.doc_fields.decks
+	
+	$account_bar/setting_button.pressed.connect(GameManager.show_title_setting)
 	pass
 
 
@@ -110,11 +111,13 @@ func set_index(value):
 func _on_left_pressed():
 	if is_equal_approx(input_buffer_timer.get_time_left() , 0.0):
 		self.index -= 1
+		GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 
 
 func _on_right_pressed():
 	if is_equal_approx(input_buffer_timer.get_time_left() , 0.0):
 		self.index += 1
+		GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 
 
 func _on_first_button_gui_input(event):
@@ -122,6 +125,7 @@ func _on_first_button_gui_input(event):
 	if event is InputEventMouseButton and is_equal_approx(input_buffer_timer.get_time_left() , 0.0):
 		if event.button_mask == MOUSE_BUTTON_LEFT:
 			self.index -= 1
+			GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 
 
 func _on_second_button_gui_input(event):
@@ -135,12 +139,5 @@ func _on_third_button_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_mask == MOUSE_BUTTON_LEFT and is_equal_approx(input_buffer_timer.get_time_left() , 0.0):
 			self.index += 1
+			GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 
-
-
-func _on_log_out_btn_gui_input(event):
-	if event is InputEventMouseButton:
-		if event.button_mask == MOUSE_BUTTON_LEFT:
-			await Firebase.Auth.logout()
-			get_tree().change_scene_to_file("res://authentication/authentication.tscn")
-			
