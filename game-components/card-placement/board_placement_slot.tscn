@@ -1,16 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://okjcdlpts531"]
-
-[ext_resource type="Texture2D" uid="uid://bps5mu6bsmelc" path="res://game-components/card-placement/card_grid.png" id="1_d4ro4"]
+[gd_scene load_steps=2 format=3 uid="uid://okjcdlpts531"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2oqv"]
 size = Vector2(110, 110)
 
 [node name="board_placement_slot" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(55, 55)
-scale = Vector2(0.214844, 0.214844)
-texture = ExtResource("1_d4ro4")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(55, 91)
@@ -20,3 +13,8 @@ metadata/_edit_group_ = true
 position = Vector2(0, -36)
 shape = SubResource("RectangleShape2D_g2oqv")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 110.0
+offset_bottom = 110.0
+mouse_filter = 2

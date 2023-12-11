@@ -42,6 +42,7 @@ func _on_timer_timeout():
 
 
 func _on_cancel_pressed():
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	var queue_cancel_message = {
 		"message" : Client.Message.CANCEL_QUEUE,
 		"client_id" : Client.peer_id
@@ -60,6 +61,7 @@ func _on_line_edit_text_changed(new_text):
 
 
 func _on_create_pressed():
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	$challenge_mode/create.disabled = true
 	$challenge_mode/join.disabled = true
 	var queue_request_message = {
@@ -82,15 +84,19 @@ func on_receive_data(data):
 			var set_play_value = func(fight_scene):
 				fight_scene.data = data
 			await SceneChanger.change_scene("res://fight-screen/fight_screen.tscn" , "texture_fade" , "texture_fade" , set_play_value)
-			
-
-			
-			pass
+#		if data.state == "wrong":
+#			$challenge_mode/create.disabled = false
+#			$challenge_mode/join.disabled = false
+#			$challenge_mode/LineEdit.text = ""
+#
+#
+#			pass
 	pass
 
 
 
 func _on_join_pressed():
+	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	$challenge_mode/create.disabled = true
 	$challenge_mode/join.disabled = true
 	if $challenge_mode/LineEdit.editable:

@@ -7,10 +7,6 @@ var card_texture_size = Vector2(920 , 1280)
 
 func _ready():
 	AudioServer.set_bus_volume_db(
-		0,
-		linear_to_db(0.5)
-	)
-	AudioServer.set_bus_volume_db(
 		1,
 		linear_to_db(0.5)
 	)

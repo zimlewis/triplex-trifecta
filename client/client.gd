@@ -18,6 +18,8 @@ var peer = WebSocketMultiplayerPeer.new()
 var webrtc_peer = WebRTCMultiplayerPeer.new()
 var peer_id
 
+var connected_peers = []
+
 signal receive_data(data)
 
 func _ready():
@@ -29,14 +31,14 @@ func _ready():
 	pass
 
 func connected_to_server():
-	print("server connected")
+	pass
 
 func peer_connected(id):
-	print("connected " + str(id))
+	connected_peers.append(id)
+	
 
 func peer_disconnected(id):
-	print("disconnected " + str(id))
-	pass
+	connected_peers.pop_at(connected_peers.find(id))
 
 func _process(delta):
 	peer.poll()
@@ -54,6 +56,11 @@ func _process(delta):
 
 func connect_to_server(ip):
 	var error = peer.create_client("ws://127.0.0.1:8915")
+	print(error)
+	if error != OK:
+		connect_to_server("")
+	
+	
 
 func on_receive_data(data):
 	if data.message == Message.ID:
@@ -92,6 +99,7 @@ func create_peer(id):
 		
 		var err = webrtc_peer.add_peer(peer , int(id))
 		
+		print("rtc add peer: " , err)
 		
 		if int(id) < webrtc_peer.get_unique_id():
 			peer.create_offer()

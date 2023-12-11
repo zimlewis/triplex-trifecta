@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://0nrl3exgrm76"]
+[gd_scene load_steps=28 format=3 uid="uid://0nrl3exgrm76"]
 
 [ext_resource type="Script" path="res://title-screen/title_screen.gd" id="1_ftpve"]
 [ext_resource type="Script" path="res://title-screen/title_image.gd" id="2_3p0km"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cbljg8b2n56x6" path="res://title-screen/sprites/border.png" id="12_gs44v"]
 [ext_resource type="Script" path="res://title-screen/play_panel.gd" id="13_5agm0"]
 [ext_resource type="FontFile" uid="uid://cjs2giljtia4" path="res://fonts/vinque.rg-regular.otf" id="13_73xwh"]
+[ext_resource type="Texture2D" uid="uid://crguurpsl11xb" path="res://settings/settings.png" id="13_uprnn"]
 [ext_resource type="Theme" uid="uid://dqjm0g80h0h8f" path="res://title-screen/title_screen_theme.tres" id="14_ucgb7"]
 [ext_resource type="Script" path="res://title-screen/gui_input.gd" id="16_2p5pw"]
 [ext_resource type="Script" path="res://title-screen/deck_panel.gd" id="17_u44rp"]
@@ -377,13 +378,20 @@ text = "RP: 20"
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="setting_button" type="Button" parent="account_bar"]
+[node name="setting_button" type="TextureButton" parent="account_bar"]
 layout_mode = 0
-offset_left = 316.0
-offset_top = 35.0
-offset_right = 359.0
-offset_bottom = 78.0
-text = "s"
+offset_left = 312.0
+offset_top = 31.0
+offset_right = 812.0
+offset_bottom = 531.0
+scale = Vector2(0.1, 0.1)
+focus_mode = 0
+texture_normal = ExtResource("13_uprnn")
+texture_pressed = ExtResource("13_uprnn")
+texture_hover = ExtResource("13_uprnn")
+texture_disabled = ExtResource("13_uprnn")
+texture_focused = ExtResource("13_uprnn")
+stretch_mode = 0
 
 [node name="play_panel" type="NinePatchRect" parent="."]
 layout_mode = 0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8sik78k4qkxe"
-path="res://.godot/imported/pass.png-d94af89b4d9dca662eded7d99e7b6df6.ctex"
+uid="uid://bitolbk3se4lg"
+path="res://.godot/imported/turnButton_normal.png-d19973507fd9f4143306ee2b60e5bf19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://fight-screen/hud/pass.png"
-dest_files=["res://.godot/imported/pass.png-d94af89b4d9dca662eded7d99e7b6df6.ctex"]
+source_file="res://fight-screen/hud/turnButton_normal.png"
+dest_files=["res://.godot/imported/turnButton_normal.png-d19973507fd9f4143306ee2b60e5bf19.ctex"]
 
 [params]
 

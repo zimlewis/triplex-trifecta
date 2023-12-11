@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwc7vtp4uad5g"]
+[gd_scene load_steps=10 format=3 uid="uid://dwc7vtp4uad5g"]
 
 [ext_resource type="Script" path="res://settings/title-screen-settings/title_screen_setting.gd" id="1_uf4jg"]
 [ext_resource type="PackedScene" uid="uid://bg5oj13s5itr3" path="res://settings/volume-settings/volume_slider.tscn" id="1_wvxt4"]
@@ -10,6 +10,16 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jff02"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_utmot"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gfkug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c84hq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0esoq"]
 
 [node name="title_screen_setting" type="CanvasLayer"]
 script = ExtResource("1_uf4jg")
@@ -76,7 +86,13 @@ layout_mode = 0
 offset_left = 835.0
 offset_right = 870.0
 offset_bottom = 35.0
-text = "x"
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jff02")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_utmot")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gfkug")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c84hq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0esoq")
+text = "X"
 
 [node name="logout" type="Button" parent="setting_panel"]
 layout_mode = 0
@@ -84,6 +100,7 @@ offset_left = 700.0
 offset_top = 429.0
 offset_right = 823.0
 offset_bottom = 470.0
+focus_mode = 0
 text = "Logout"
 
 [node name="Label" type="Label" parent="setting_panel"]

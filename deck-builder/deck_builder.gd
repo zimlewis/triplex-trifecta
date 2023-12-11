@@ -46,8 +46,8 @@ func _ready():
 	pass
 
 func card_inputed(card , event):
-	add_to_deck(card.card_id)
-	
+	var result = add_to_deck(card.card_id)
+	if result == 1: GameManager.play_sound_effect("res://sound-effect/gui_db_addcard.wav")
 
 
 func add_to_deck(card):
@@ -56,16 +56,16 @@ func add_to_deck(card):
 		for i in deck:
 			if GameData.card_database[i].type == "Leader":
 				leader_count += 1
-		if leader_count + 1 > max_leader:return
+		if leader_count + 1 > max_leader:return 0
 	
 	if GameData.card_database[card].type == "Lad":
 		var lad_count = 0
 		for i in deck:
 			if GameData.card_database[i].type == "Lad":
 				lad_count += 1
-		if lad_count + 1 > max_lad:return
+		if lad_count + 1 > max_lad:return 0
 	
-	GameManager.play_sound_effect("res://sound-effect/gui_db_addcard.wav")
+	
 	deck.append(card)
 	var card_label = get_node("selected_card/ScrollContainer/cards").get_node(card)
 	if card_label == null:
@@ -125,6 +125,8 @@ func add_to_deck(card):
 		var card_amount = card_label.get_node("card_amount")
 		card_amount.name = "card_amount"
 		card_amount.text = "x" + str(amount_of_added_card)
+	
+	return 1
 
 
 func get_amount_of_added_card(card_id):
