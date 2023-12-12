@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0nrl3exgrm76"]
+[gd_scene load_steps=29 format=3 uid="uid://0nrl3exgrm76"]
 
 [ext_resource type="Script" path="res://title-screen/title_screen.gd" id="1_ftpve"]
 [ext_resource type="Script" path="res://title-screen/title_image.gd" id="2_3p0km"]
@@ -18,6 +18,7 @@
 [ext_resource type="Theme" uid="uid://dqjm0g80h0h8f" path="res://title-screen/title_screen_theme.tres" id="14_ucgb7"]
 [ext_resource type="Script" path="res://title-screen/gui_input.gd" id="16_2p5pw"]
 [ext_resource type="Script" path="res://title-screen/deck_panel.gd" id="17_u44rp"]
+[ext_resource type="Texture2D" uid="uid://bkyta7lwyavvo" path="res://title-screen/delete.png" id="19_1ite6"]
 [ext_resource type="AudioStream" uid="uid://c2nlm54nuupda" path="res://title-screen/mainmenumusic.ogg" id="19_oav00"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fifgx"]
@@ -662,17 +663,21 @@ focus_mode = 0
 theme = ExtResource("14_ucgb7")
 text = "Create"
 
-[node name="remove_button" type="Button" parent="deck_panel/play_info"]
+[node name="remove_button" type="TextureButton" parent="deck_panel/play_info"]
 layout_mode = 0
-offset_left = 217.0
+offset_left = 206.0
 offset_top = 5.0
-offset_right = 272.297
-offset_bottom = 67.8103
+offset_right = 906.0
+offset_bottom = 705.0
+scale = Vector2(0.1, 0.1)
 focus_mode = 0
 theme = ExtResource("14_ucgb7")
-theme_override_fonts/font = ExtResource("13_73xwh")
 disabled = true
-text = "🗑️"
+texture_normal = ExtResource("19_1ite6")
+texture_pressed = ExtResource("19_1ite6")
+texture_hover = ExtResource("19_1ite6")
+texture_disabled = ExtResource("19_1ite6")
+texture_focused = ExtResource("19_1ite6")
 
 [node name="deck_choser" type="ScrollContainer" parent="deck_panel"]
 layout_mode = 1

@@ -6,7 +6,8 @@ enum card_state{
 	IN_HAND,
 	IN_INSPECT,
 	IN_PREVIEW,
-	IS_DECK_LEADER
+	IS_DECK_LEADER,
+	IS_DRAGGING
 }
 
 @onready var image = $image
@@ -36,14 +37,26 @@ enum card_state{
 @onready var type_icon = $card_description_frame/detailed_information/type
 @onready var region_icon = $card_description_frame/detailed_information/region
 
+@onready var action_panel = $action_panel
+@onready var drop_area = $drop_area
 
 var mouse_in_card = false;
+var is_ally = false
 
+var body_ref : set = set_body_ref
+
+signal press_play
+signal press_ability
+
+signal return_to_hand
+signal place(area)
 
 @export var card_id = "leader_thyena_citrious"
-var card_information;
+var card_information
 
 var state : card_state = card_state.IN_HAND : set = set_state 
+
+
 
 signal mouse_event(card , event)
 signal delete_inspect
@@ -51,13 +64,25 @@ signal inspect_deck
 
 func _init():
 	scale = GameManager.card_size/GameManager.card_texture_size
+	pass
+
+func set_body_ref(value):
+	if body_ref != null:
+		body_ref.get_parent().modulate.a = 1
+	if value == null:
+		body_ref = null
+		return
+	value.get_parent().modulate.a = 0.8
+	body_ref = value
 
 func _ready():
 	init_card()
-	state = card_state.IN_HAND
+	self.state = card_state.IN_HAND
 	
 func set_state(value):
 	state = value
+	frame.get_node("NinePatchRect").modulate.a = 0
+	drop_area.get_node("CollisionShape2D").shape = null
 	match state:
 		card_state.IN_PLAY:
 			frame.size = Vector2(920 , 920)
@@ -66,6 +91,7 @@ func set_state(value):
 			bar.visible = false if card_information.type == "Leader" else true
 			card_name.visible = false if card_information.type == "Leader" else true
 			card_tittle.visible = false if card_information.type == "Leader" else true
+			frame.get_node("NinePatchRect").modulate = Color.GREEN if is_ally else Color.RED
 		card_state.IN_HAND:
 			frame.size = Vector2(920 , 1280)
 			ability_description.visible = true
@@ -80,10 +106,32 @@ func set_state(value):
 			bar.visible = true
 			card_name.visible = true
 			card_tittle.visible = true
+		card_state.IS_DRAGGING:
+			scale = GameManager.card_size/GameManager.card_texture_size
+			frame.size = Vector2(920 , 920)
+			ability_description.visible = false
+			effect_all.visible = false
+			bar.visible = false if card_information.type == "Leader" else true
+			card_name.visible = false if card_information.type == "Leader" else true
+			card_tittle.visible = false if card_information.type == "Leader" else true
+			
+			var area_shape = RectangleShape2D.new()
+			area_shape.size = Vector2(920 , 920)
+			drop_area.get_node("CollisionShape2D").shape = area_shape
+			
+			action_panel.visible = false
+			
+			drop_area.get_node("CollisionShape2D").position = Vector2(460 , 460)
 
 
 
-
+func _process(delta):
+	if state == card_state.IS_DRAGGING:
+		var offset = (frame.size * scale) / 2
+		global_position = get_global_mouse_position() - offset
+		
+#		for area in drop_area.get_overlapping_areas():
+#			area.get_node("CollisionShape2D").shape.intersection(drop_area.get_node("CollisionShape2D"))
 
 
 func init_card():
@@ -167,22 +215,36 @@ func init_card():
 	
 
 
-
-
-
 func _on_frame_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			if !state == card_state.IN_INSPECT:
 				mouse_event.emit(self , event)
+			match state:
+				card_state.IN_HAND:
+					if is_ally:
+						action_panel.position = Vector2(0 , -387)
+						action_panel.visible = !action_panel.visible
+				card_state.IN_PLAY:
+					if is_ally:
+						action_panel.position = Vector2(0 , 991)
+						action_panel.visible = !action_panel.visible
+				card_state.IS_DRAGGING:
+					if body_ref == null:
+						return_to_hand.emit()
+					else:
+						place.emit(body_ref.get_parent())
+					
+			
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:
-			if state == card_state.IN_HAND or state == card_state.IN_PLAY or state == card_state.IN_PREVIEW:
-				GameManager.inspect(card_id)
-			if state == card_state.IS_DECK_LEADER:
-				inspect_deck.emit()
-			if state == Card.card_state.IN_INSPECT:
-				delete_inspect.emit()
+			match state:
+				card_state.IN_HAND , card_state.IN_PLAY , card_state.IN_PREVIEW:
+					GameManager.inspect(card_id)
+				card_state.IS_DECK_LEADER:
+					inspect_deck.emit()
+				Card.card_state.IN_INSPECT:
+					delete_inspect.emit()
 
 func inspect(id):
 	if id is String:
@@ -211,3 +273,21 @@ func inspect(id):
 		inspect_card.position = GameManager.center_of_screen - GameManager.card_texture_size * inspect_card.scale / 2
 		inspect_card.delete_inspect.connect(inspect_layer.queue_free)
 		
+
+
+func _on_play_pressed():
+	press_play.emit()
+
+
+func _on_ability_pressed():
+	press_ability.emit()
+
+
+func _on_drop_area_area_entered(area):
+	if area in get_tree().get_nodes_in_group("dropable_areas"):
+		self.body_ref = area
+
+
+func _on_drop_area_area_exited(area):
+	if body_ref == area:
+		self.body_ref = null

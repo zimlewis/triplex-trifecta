@@ -5,8 +5,12 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	enemy_leader.is_ally = false
 	enemy_leader.state = Card.card_state.IN_PLAY
+	
+	player_leader.is_ally = true
 	player_leader.state = Card.card_state.IN_PLAY
+	
 
 
 

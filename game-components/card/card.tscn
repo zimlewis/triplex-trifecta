@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cwvogqiwgp5h0"]
+[gd_scene load_steps=30 format=3 uid="uid://cwvogqiwgp5h0"]
 
 [ext_resource type="Script" path="res://game-components/card/card.gd" id="1_e54oh"]
 [ext_resource type="Shader" path="res://game-components/card/crop.gdshader" id="2_craub"]
+[ext_resource type="Texture2D" uid="uid://bdokdq3hbu0wb" path="res://game-components/card/lads/Lynx/img.png" id="3_4fse7"]
 [ext_resource type="Texture2D" uid="uid://d3t3wxf1l68qy" path="res://game-components/card/bar/leftBar.png" id="5_o1kkw"]
 [ext_resource type="Theme" uid="uid://pouk3bvjvx18" path="res://game-components/card/card.tres" id="6_5svqc"]
 [ext_resource type="Texture2D" uid="uid://jejiwqfyc63o" path="res://game-components/card/bar_icon/l.png" id="6_efj20"]
@@ -17,13 +18,17 @@
 [ext_resource type="Texture2D" uid="uid://bklh12fra4bxi" path="res://game-components/card/icons/Wildcardz.png" id="11_khnek"]
 [ext_resource type="Texture2D" uid="uid://l2dbt0pstjgb" path="res://game-components/card/icons/Lad.png" id="12_3fpi6"]
 [ext_resource type="Texture2D" uid="uid://bd8n73rhwmwvm" path="res://game-components/card/frames/frame_aouni.png" id="13_6fckw"]
+[ext_resource type="Texture2D" uid="uid://bkmgpd8tt7l1v" path="res://game-components/card/card_grow_outline.png" id="14_7vf41"]
+[ext_resource type="Theme" uid="uid://dqjm0g80h0h8f" path="res://title-screen/title_screen_theme.tres" id="18_rj6pn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnmvo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qka3k"]
 shader = ExtResource("2_craub")
 shader_parameter/crop_left = 0.01
 shader_parameter/crop_right = 0.001
 shader_parameter/crop_top = 0.001
-shader_parameter/crop_bottom = 0.28
+shader_parameter/crop_bottom = 0.3
 
 [sub_resource type="Theme" id="Theme_tbvft"]
 Label/colors/font_color = Color(1, 1, 1, 1)
@@ -91,13 +96,23 @@ RichTextLabel/constants/outline_size = 20
 RichTextLabel/font_sizes/normal_font_size = 57
 RichTextLabel/fonts/normal_font = ExtResource("8_uxrkt")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oexv2"]
+bg_color = Color(0, 0, 0, 0.337255)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
 [node name="card" type="Node2D"]
+z_index = 3
+material = SubResource("ShaderMaterial_xnmvo")
 script = ExtResource("1_e54oh")
-metadata/_edit_horizontal_guides_ = [95.0, 640.0]
-metadata/_edit_vertical_guides_ = [460.0]
+metadata/_edit_horizontal_guides_ = [95.0, 640.0, 920.0]
+metadata/_edit_vertical_guides_ = [460.0, 920.0]
 
 [node name="image" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qka3k")
+texture = ExtResource("3_4fse7")
 centered = false
 
 [node name="bar" type="Node2D" parent="."]
@@ -259,6 +274,24 @@ patch_margin_top = 49
 patch_margin_right = 41
 patch_margin_bottom = 49
 
+[node name="NinePatchRect" type="NinePatchRect" parent="frame"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -50.0
+offset_right = 49.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_7vf41")
+patch_margin_left = 103
+patch_margin_top = 104
+patch_margin_right = 102
+patch_margin_bottom = 102
+
 [node name="bar_effect" type="Node2D" parent="."]
 
 [node name="left" type="Sprite2D" parent="bar_effect"]
@@ -335,4 +368,47 @@ theme = SubResource("Theme_jud80")
 text = "+2"
 horizontal_alignment = 1
 
+[node name="action_panel" type="Panel" parent="."]
+visible = false
+offset_top = -387.0
+offset_right = 920.0
+offset_bottom = -17.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oexv2")
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="action_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_right = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="play" type="Button" parent="action_panel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("18_rj6pn")
+theme_override_font_sizes/font_size = 100
+text = "Play"
+
+[node name="ability" type="Button" parent="action_panel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("18_rj6pn")
+theme_override_font_sizes/font_size = 100
+text = "Ability"
+
+[node name="drop_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="drop_area"]
+position = Vector2(460, 460)
+
 [connection signal="gui_input" from="frame" to="." method="_on_frame_gui_input"]
+[connection signal="pressed" from="action_panel/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="action_panel/VBoxContainer/ability" to="." method="_on_ability_pressed"]
+[connection signal="area_entered" from="drop_area" to="." method="_on_drop_area_area_entered"]
+[connection signal="area_exited" from="drop_area" to="." method="_on_drop_area_area_exited"]
