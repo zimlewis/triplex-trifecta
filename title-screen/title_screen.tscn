@@ -8,15 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://jg145crrfwnb" path="res://title-screen/sprites/buttonsBar_full.png" id="6_alrtg"]
 [ext_resource type="Texture2D" uid="uid://kb8f1jymwcc1" path="res://title-screen/sprites/aboutUs.png" id="7_35krj"]
 [ext_resource type="Shader" path="res://title-screen/glitch.gdshader" id="7_hr5x3"]
-[ext_resource type="Texture2D" path="res://title-screen/sprites/aboutUsT.png" id="8_ep1c2"]
+[ext_resource type="Texture2D" uid="uid://dm331mjla3t53" path="res://title-screen/sprites/aboutUsT.png" id="8_ep1c2"]
 [ext_resource type="Texture2D" uid="uid://wyxysgqn0apn" path="res://title-screen/sprites/move_button.png" id="9_bc5bb"]
 [ext_resource type="Texture2D" uid="uid://c7i2nhovr5q0n" path="res://title-screen/sprites/account_bar.png" id="11_0tasv"]
-[ext_resource type="Texture2D" path="res://title-screen/sprites/border.png" id="12_gs44v"]
+[ext_resource type="Texture2D" uid="uid://cbljg8b2n56x6" path="res://title-screen/sprites/border.png" id="12_gs44v"]
 [ext_resource type="Script" path="res://title-screen/play_panel.gd" id="13_5agm0"]
 [ext_resource type="FontFile" uid="uid://cjs2giljtia4" path="res://fonts/vinque.rg-regular.otf" id="13_73xwh"]
 [ext_resource type="Theme" uid="uid://dqjm0g80h0h8f" path="res://title-screen/title_screen_theme.tres" id="14_ucgb7"]
 [ext_resource type="Script" path="res://title-screen/gui_input.gd" id="16_2p5pw"]
-[ext_resource type="Texture2D" path="res://title-screen/sprites/logout.png" id="16_k3bjs"]
+[ext_resource type="Texture2D" uid="uid://bqfw86va6jcip" path="res://title-screen/sprites/logout.png" id="16_k3bjs"]
 [ext_resource type="Script" path="res://title-screen/deck_panel.gd" id="17_u44rp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fifgx"]
@@ -676,7 +676,6 @@ theme_override_constants/v_separation = 16
 columns = 4
 
 [node name="about_us_panel" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 1486.0
 offset_top = 54.0

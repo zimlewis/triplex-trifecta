@@ -118,7 +118,7 @@ func choose_deck(deck):
 
 func _on_play_pressed():
 	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
-	var set_queue_scene_value = func(queue_scene):
-		queue_scene.chosen_deck = self.decks[self.chosen_deck]
-		queue_scene.gamemode = self.chosen_mode
-	await SceneChanger.change_scene("res://match-queue/match_queue.tscn" , "texture_fade" , "texture_fade" , set_queue_scene_value)
+#	var set_queue_scene_value = func(queue_scene):
+#		queue_scene.chosen_deck = self.decks[self.chosen_deck]
+#		queue_scene.gamemode = self.chosen_mode
+#	await SceneChanger.change_scene("res://match-queue/match_queue.tscn" , "texture_fade" , "texture_fade" , set_queue_scene_value)
