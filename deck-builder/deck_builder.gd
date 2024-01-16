@@ -172,26 +172,6 @@ func _on_button_pressed():
 	if deck_name == "": return
 	
 	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
-	var firestore_collection = Firebase.Firestore.collection("users")
-	var had_decks = GameData.user_data.doc_fields.decks
-
-
-	if mode == EDIT:
-		if had_decks.has(deck_name) and deck_name != chosen_deck_name:return
-		if deck_name != chosen_deck_name:
-			had_decks.erase(chosen_deck_name)
-	if mode == CREATE:
-		if had_decks.has(deck_name): return
-		
-	had_decks[deck_name] = deck
-	
-	
-	var up_task: FirestoreTask = firestore_collection.update(GameData.user_data.doc_name , {'decks' : had_decks})
-	await up_task.task_finished
-	firestore_collection.get_doc(Firebase.Auth.auth.localid)
-	GameData.user_data = await firestore_collection.get_document
-	
-	
 	turn_off_deck_builder()
 
 func turn_off_deck_builder():

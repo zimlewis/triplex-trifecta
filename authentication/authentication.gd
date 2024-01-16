@@ -65,7 +65,7 @@ func _ready():
 func login_pressed():
 	disable_form()
 	await Firebase.Auth.login_with_email_and_password(login_email.text , login_password.text)
-
+	enable_form()
 
 
 func register_pressed():
@@ -73,22 +73,21 @@ func register_pressed():
 		error_register_label.text = "password does not match"
 		return
 	
-	disable_form()
 	Firebase.Auth.signup_with_email_and_password(register_email.text , register_password.text)
-
+	enable_form()
 
 
 func signup_succeeded(auth_info : Dictionary):
 	Firebase.Auth.update_account(auth_info.idtoken , register_username.text , "" , [] , true)
 	var firestore_user_collection : FirestoreCollection = Firebase.Firestore.collection("users")
 	var add_task : FirestoreTask = firestore_user_collection.add(auth_info.localid , {
-		"lv" : 0, 
-		"rank" : 0, 
-		"elo" : 0,
-		"exp" : 0, 
-		"in_game_name" : register_username.text, 
-		"email" : auth_info.email, 
+		"lv" : 0 , 
+		"rank" : 0 , 
+		"exp" : 0 , 
+		"in_game_name" : register_username.text , 
+		"email" : auth_info.email , 
 		"decks":{
+			"default" : []
 		}
 	})
 	await add_task.task_finished
@@ -96,12 +95,11 @@ func signup_succeeded(auth_info : Dictionary):
 	register_email.text = ""
 	register_password.text = ""
 	register_password_confirm.text = ""
-	enable_form()
+	$form.current_tab = 0
 	pass
 
 func signup_failed(code, message):
 	error_register_label.text = str(code) + ": " + message
-	enable_form()
 	pass
 
 
@@ -119,45 +117,12 @@ func login_succeeded(auth_info : Dictionary):
 
 	
 	SceneChanger.change_scene("res://title-screen/title_screen.tscn" , "texture_fade" , "texture_fade")
-  
+
 func login_failed(code , message : String):
 	error_login_label.text = str(code) + ": " + message
-	enable_form()
-
 	
 #func userdata_received(auth_info : FirebaseUserData):
 #	pass
 #
 #func logged_out():
 #	pass
-
-
-
-
-
-func _on_rg_pressed():
-	for i in [$form/login/email, $form/login/password]:
-		i.editable = false
-	for i in [%btn_login, $form/login/rg]:
-		i.disabled = true
-	
-	for i in [$form/register/username, $form/register/email, $form/register/password, $form/register/password_confirm]:
-		i.editable = true
-	for i in [%btn_register, $form/register/lg]:
-		i.disabled = false
-	$form/login.visible = false
-	$form/register.visible = true
-
-
-func _on_lg_pressed():
-	for i in [$form/login/email, $form/login/password]:
-		i.editable = true
-	for i in [%btn_login, $form/login/rg]:
-		i.disabled = false
-	
-	for i in [$form/register/username, $form/register/email, $form/register/password, $form/register/password_confirm]:
-		i.editable = false
-	for i in [%btn_register, $form/register/lg]:
-		i.disabled = true
-	$form/login.visible = true
-	$form/register.visible = false
