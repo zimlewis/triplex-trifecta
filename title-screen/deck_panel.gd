@@ -1,7 +1,5 @@
 extends NinePatchRect
 
-signal recieve_from_server
-
 var grid_size = Vector2(147.2 , 204.8)
 var initialized = false
 
@@ -19,8 +17,6 @@ func set_decks(value):
 	decks = value
 	for i in $deck_choser/GridContainer.get_children():
 		i.queue_free()
-	
-	
 	for i in decks.duplicate():
 		var grid = Control.new()
 		grid.custom_minimum_size = grid_size
@@ -73,7 +69,6 @@ func _ready():
 	pass
 
 func choose_deck(deck):
-	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
 	if $play_info/deck_hover.get_child(0) != null:
 		$play_info/deck_hover.get_child(0).queue_free()
 	var deck_leader = load("res://game-components/card/card.tscn").instantiate()
@@ -105,7 +100,6 @@ func _on_create_button_pressed():
 		deck_builder.mode = deck_builder.CREATE
 	var deck_builder = await SceneChanger.change_scene("res://deck-builder/deck_builder.tscn" , "texture_fade" , "texture_fade" , set_deck_builder_value)
 
-	
 
 func _on_edit_button_pressed():
 	GameManager.play_sound_effect("res://sound-effect/gui_click.wav")
@@ -114,6 +108,7 @@ func _on_edit_button_pressed():
 		deck_builder.chosen_deck = self.decks[self.chosen_deck]
 		deck_builder.chosen_deck_name = self.chosen_deck
 	var deck_builder = await SceneChanger.change_scene("res://deck-builder/deck_builder.tscn" , "texture_fade" , "texture_fade" , set_deck_builder_value)
+
 
 
 func _on_remove_button_pressed():
